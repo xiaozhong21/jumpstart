@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import * as apiClient from "../services/apiClient";
-import { Project } from "../types";
+import { Project } from "../utils/types";
 
 const Projects = () => {
   const [projects, setProjects] = React.useState<Project[]>([]);

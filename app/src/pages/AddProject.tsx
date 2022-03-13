@@ -3,7 +3,7 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as apiClient from "../services/apiClient";
-import { Project } from "../types";
+import { Project } from "../utils/types";
 
 const AddProject = () => {
   const [title, setTitle] = React.useState<string>("");

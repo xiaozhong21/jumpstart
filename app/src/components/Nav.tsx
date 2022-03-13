@@ -1,11 +1,27 @@
+import { AppBar, Box, Toolbar, Button, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 const Nav = () => (
-  <>
-    <NavLink to="/">Home</NavLink>
-    <NavLink to="/projects">Projects</NavLink>
-    <NavLink to="/addProject">JumpStart Your Project</NavLink>
-  </>
+  <Box sx={{ flexGrow: 1 }}>
+    <AppBar position="sticky">
+      <Toolbar>
+        <Typography
+          variant="h4"
+          component="div"
+          sx={{ flexGrow: 1 }}
+          style={{ color: "#ffd700", fontFamily: "Monaco" }}
+        >
+          <NavLink to="/">JumpStart</NavLink>
+        </Typography>
+        <NavLink to="/projects">
+          <Button color="inherit">All Projects</Button>
+        </NavLink>
+        <NavLink to="/addProject">
+          <Button color="inherit">JumpStart Your Project</Button>
+        </NavLink>
+      </Toolbar>
+    </AppBar>
+  </Box>
 );
 
 export default Nav;
