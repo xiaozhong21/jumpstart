@@ -8,10 +8,10 @@ import {
 const pgp = pgPromise();
 const db = initDb();
 
-export const getTasks = () => db.any("SELECT * FROM tasks");
+export const getProjects = () => db.any("SELECT * FROM projects");
 
-export const addTask = (name: string) =>
-  db.one("INSERT INTO tasks(name) VALUES($<name>) RETURNING *", { name });
+export const addProject = (title: string) =>
+  db.one("INSERT INTO projects(title) VALUES($<title>) RETURNING *", { title });
 
 function initDb() {
   let connection: string | IConnectionParameters<IClient>;

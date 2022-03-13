@@ -3,14 +3,13 @@ var express = require("express");
 
 import mime from "mime-types";
 
-import taskRouter from "./taskRouter";
+import projectRouter from "./projectRouter";
 
 const app = express();
 
-app.use("/api/tasks", taskRouter);
+app.use("/api/projects", projectRouter);
 
-// Do not comment out or delete this end point. The React development server
-// won't start until it pings this end point successfully.
+// Heartbeat URL endpoint
 app.get("/api/ping", (req: Request, res: Response) =>
   res.json({ response: "pong" }),
 );

@@ -1,10 +1,13 @@
-export const getTasks = () => _get("/api/tasks");
+import { Project } from "./types";
 
-export const addTask = (name: string) => _post("/api/tasks", { name });
+export const getProjects = async () => _get("/api/projects");
+
+export const addProject = async (project: Project) =>
+  _post("/api/projects", project);
 
 const _get = async (url: RequestInfo) => (await fetch(url)).json();
 
-const _post = async (url: RequestInfo, body: { name: string }) => {
+const _post = async (url: RequestInfo, body: { title: string }) => {
   const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

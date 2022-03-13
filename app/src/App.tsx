@@ -1,18 +1,23 @@
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import Tasks from "./Tasks";
+import AddProject from "./AddProject";
+import Home from "./Home";
+import Nav from "./Nav";
+import Projects from "./Projects";
 
-const App = () => (
-  <>
-    <NavLink to="/" end>
-      Home
-    </NavLink>
-    <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
-  </>
-);
+// import './App.css';
 
-const Home = () => <Tasks />;
+const App = () => {
+  return (
+    <>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/addProject" element={<AddProject />} />
+      </Routes>
+    </>
+  );
+};
 
 export default App;
