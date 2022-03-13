@@ -20,8 +20,9 @@ if (process.env?.SERVE_REACT?.toLowerCase() === "true") {
     express.static("/app", {
       maxAge: "1d",
       setHeaders: (res, path) =>
-        ["application/json", "text/html"].includes(mime.lookup(path).toString()) &&
-        res.setHeader("Cache-Control", "public, max-age=0"),
+        ["application/json", "text/html"].includes(
+          mime.lookup(path).toString(),
+        ) && res.setHeader("Cache-Control", "public, max-age=0"),
     }),
   );
 

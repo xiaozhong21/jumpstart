@@ -1,6 +1,9 @@
 import * as dotenv from "dotenv";
 import * as pgPromise from "pg-promise";
-import { IConnectionParameters, IClient } from "pg-promise/typescript/pg-subset";
+import {
+  IConnectionParameters,
+  IClient,
+} from "pg-promise/typescript/pg-subset";
 
 const pgp = pgPromise();
 const db = initDb();
