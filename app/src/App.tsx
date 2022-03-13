@@ -1,12 +1,18 @@
-import React from 'react';
-import './App.css';
+import { Routes, Route, NavLink } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      Hello World
-    </div>
-  );
-}
+import Tasks from "./Tasks";
+
+const App = () => (
+  <>
+    <NavLink to="/" end>
+      Home
+    </NavLink>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
+  </>
+);
+
+const Home = () => <Tasks />;
 
 export default App;
