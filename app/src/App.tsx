@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 
-import AddProject from "./AddProject";
-import Home from "./Home";
-import Nav from "./Nav";
-import Projects from "./Projects";
+import AddProject from "./pages/AddProject";
+import Home from "./pages/Home";
+import Nav from "./components/Nav";
+import Projects from "./pages/Projects";
 
 // import './App.css';
 

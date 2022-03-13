@@ -1,4 +1,4 @@
-import { Project } from "./types";
+import { Project } from "../types";
 
 export const getProjects = async () => _get("/api/projects");
 

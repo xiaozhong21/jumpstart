@@ -2,8 +2,8 @@ import * as React from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import * as apiClient from "./apiClient";
-import { Project } from "./types";
+import * as apiClient from "../services/apiClient";
+import { Project } from "../types";
 
 const AddProject = () => {
   const [title, setTitle] = React.useState<string>("");
