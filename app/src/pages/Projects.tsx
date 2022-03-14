@@ -25,7 +25,7 @@ const Projects = () => {
       >
         {projects.map((project: Project) => (
           <Grid item xs={2} sm={4} md={4} key={project.project_id}>
-            <Link to="/">
+            <Link to={`/projects/${project.project_id}`}>
               <ProjectCard
                 title={project.title}
                 description={project.description}

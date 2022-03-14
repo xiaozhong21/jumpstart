@@ -10,6 +10,11 @@ const db = initDb();
 
 export const getProjects = () => db.any("SELECT * FROM projects");
 
+export const getProject = (projectId: string) =>
+  db.one("SELECT * FROM projects WHERE project_id=$<projectId>", {
+    projectId,
+  });
+
 export const addProject = (title: string) =>
   db.one("INSERT INTO projects(title) VALUES($<title>) RETURNING *", { title });
 

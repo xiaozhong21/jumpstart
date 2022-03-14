@@ -11,6 +11,15 @@ projectRouter.get("/", async (req: Request, res: Response) => {
   res.json(projects);
 });
 
+projectRouter.get("/:projectId", async (req: Request, res: Response) => {
+  try {
+    const project = await db.getProject(req.params.projectId);
+    res.json(project);
+  } catch (err: any) {
+    console.error(err);
+  }
+});
+
 projectRouter.post("/", async (req: Request, res: Response) => {
   const project = await db.addProject(req.body.title);
   res.status(201).json(project);
