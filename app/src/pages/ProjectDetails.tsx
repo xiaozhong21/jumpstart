@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Typography, CardMedia, Box } from "@mui/material";
+import { Typography, CardMedia, Box, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 import ProgressBar from "../components/ProgressBar";
@@ -31,6 +31,10 @@ const ProjectDetails = () => {
   React.useEffect(() => {
     loadProject();
   }, [loadProject]);
+
+  const handleFunding = () => {
+    alert("clicked!");
+  };
 
   return error === true ? (
     <p>{errorMessage}</p>
@@ -79,7 +83,6 @@ const ProjectDetails = () => {
         >
           <Typography variant="h5">{project.title}</Typography>
           <Typography>Created by {project.creator}</Typography>
-          {project.funding_goal}
           <ProgressBar
             fundingGoal={project.funding_goal}
             totalFundings={project.total_fundings}
@@ -87,6 +90,9 @@ const ProjectDetails = () => {
           <Typography variant="body2" component="div">
             ${project.total_fundings} raised of ${project.funding_goal}
           </Typography>
+          <Button variant="contained" onClick={handleFunding}>
+            Fund It
+          </Button>
         </Box>
       </Box>
     </div>

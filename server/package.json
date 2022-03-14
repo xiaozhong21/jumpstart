@@ -19,6 +19,7 @@
     "express": "^4.17.3",
     "mime-types": "^2.1.30",
     "pg-promise": "^10.9.5",
+    "stripe": "^8.209.0",
     "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.2"
