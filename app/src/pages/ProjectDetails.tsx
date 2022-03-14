@@ -1,7 +1,9 @@
 import * as React from "react";
 
+import { Typography, CardMedia, Box } from "@mui/material";
 import { useParams } from "react-router-dom";
 
+import ProgressBar from "../components/ProgressBar";
 import * as apiClient from "../services/apiClient";
 import { Project } from "../utils/types";
 
@@ -32,8 +34,62 @@ const ProjectDetails = () => {
 
   return error === true ? (
     <p>{errorMessage}</p>
+  ) : !project ? (
+    <p>Loading...</p>
   ) : (
-    <div>{project && project.title}</div>
+    <div style={{ width: "100%" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          gap: "10px",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            gap: "20px",
+            width: "60%",
+          }}
+        >
+          <CardMedia
+            component="img"
+            height="300"
+            image={project.image_url}
+            alt={project.title}
+          />
+          <Typography variant="body2" component="div">
+            {project.description}
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            width: "30%",
+            gap: "20px",
+          }}
+        >
+          <Typography variant="h5">{project.title}</Typography>
+          <Typography>Created by {project.creator}</Typography>
+          {project.funding_goal}
+          <ProgressBar
+            fundingGoal={project.funding_goal}
+            totalFundings={project.total_fundings}
+          />
+          <Typography variant="body2" component="div">
+            ${project.total_fundings} raised of ${project.funding_goal}
+          </Typography>
+        </Box>
+      </Box>
+    </div>
   );
 };
 

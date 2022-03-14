@@ -32,7 +32,16 @@ const ProjectCard = ({
             gap: "20px",
           }}
         >
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{
+              height: "30px",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
             {title}
           </Typography>
           <Typography
