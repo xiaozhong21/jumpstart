@@ -1,5 +1,5 @@
 export interface Project {
-  project_id?: number;
+  project_id: number;
   title: string;
   description: string;
   label: string;
@@ -25,6 +25,11 @@ export interface AddProjectInput {
   label: string;
   creator: string;
   imageUrl: string;
+  fundingGoal: number;
+  totalFundings: number;
+}
+
+export interface ProgressBarProps {
   fundingGoal: number;
   totalFundings: number;
 }

@@ -10,6 +10,8 @@ import {
 
 import { ProjectCardProps } from "../utils/types";
 
+import ProgressBar from "./ProgressBar";
+
 const ProjectCard = ({
   title,
   description,
@@ -19,15 +21,34 @@ const ProjectCard = ({
   totalFundings,
 }: ProjectCardProps) => {
   return (
-    <Card sx={{ maxWidth: 345, height: 400 }}>
+    <Card sx={{ maxWidth: 345, height: "100%" }}>
       <CardActionArea>
         <CardMedia component="img" height="140" image={imageUrl} alt={title} />
-        <CardContent>
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "20px",
+          }}
+        >
           <Typography gutterBottom variant="h5" component="div">
             {title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{
+              height: "65px",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
             {description}
+          </Typography>
+          <ProgressBar {...{ fundingGoal, totalFundings }} />
+          <Typography variant="body2" component="div">
+            ${totalFundings} raised of ${fundingGoal}
           </Typography>
         </CardContent>
       </CardActionArea>

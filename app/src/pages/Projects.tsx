@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Box, Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 
 import ProjectCard from "../components/ProjectCard";
 import * as apiClient from "../services/apiClient";
@@ -24,14 +25,16 @@ const Projects = () => {
       >
         {projects.map((project: Project) => (
           <Grid item xs={2} sm={4} md={4} key={project.project_id}>
-            <ProjectCard
-              title={project.title}
-              description={project.description}
-              label={project.label}
-              imageUrl={project.image_url}
-              fundingGoal={project.funding_goal}
-              totalFundings={project.total_fundings}
-            />
+            <Link to="/">
+              <ProjectCard
+                title={project.title}
+                description={project.description}
+                label={project.label}
+                imageUrl={project.image_url}
+                fundingGoal={project.funding_goal}
+                totalFundings={project.total_fundings}
+              />
+            </Link>
           </Grid>
         ))}
       </Grid>
