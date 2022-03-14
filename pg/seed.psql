@@ -26,7 +26,14 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.projects (
     project_id integer NOT NULL,
-    title text NOT NULL
+    title text NOT NULL,
+    description text,
+    label text,
+    creator text,
+    image_url text,
+    funding_goal integer,
+    total_fundings integer,
+    created_at timestamp without time zone DEFAULT now()
 );
 
 
@@ -34,37 +41,24 @@ CREATE TABLE public.projects (
 -- Name: projects_project_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.projects_project_id_seq
-    AS integer
+ALTER TABLE public.projects ALTER COLUMN project_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.projects_project_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: projects_project_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.projects_project_id_seq OWNED BY public.projects.project_id;
-
-
---
--- Name: projects project_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.projects ALTER COLUMN project_id SET DEFAULT nextval('public.projects_project_id_seq'::regclass);
+    CACHE 1
+);
 
 
 --
 -- Data for Name: projects; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.projects (project_id, title) FROM stdin;
-1	My awesome idea
-2	The best project ever
-3	Amazing startup idea
+COPY public.projects (project_id, title, description, label, creator, image_url, funding_goal, total_fundings, created_at) FROM stdin;
+1	My awesome project	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.	tech	xiao zhong	https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2669&q=80	1000	500	2022-03-14 02:25:06.332082
+2	The best idea ever	Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit	education	Tyler P	https://images.unsplash.com/photo-1601807576163-587225545555?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1973&q=80	15000	3000	2022-03-14 02:32:42.326443
+3	The world needs this product	At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga	art	Cindy Smith	https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2490&q=80	5000	3500	2022-03-14 02:32:47.682794
 \.
 
 
@@ -76,11 +70,11 @@ SELECT pg_catalog.setval('public.projects_project_id_seq', 3, true);
 
 
 --
--- Name: projects projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: projects pk_projects; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.projects
-    ADD CONSTRAINT projects_pkey PRIMARY KEY (project_id);
+    ADD CONSTRAINT pk_projects PRIMARY KEY (project_id);
 
 
 --

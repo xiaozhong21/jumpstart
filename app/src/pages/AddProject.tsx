@@ -3,14 +3,20 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as apiClient from "../services/apiClient";
-import { Project } from "../utils/types";
+import { AddProjectInput } from "../utils/types";
 
 const AddProject = () => {
   const [title, setTitle] = React.useState<string>("");
   const navigate = useNavigate();
 
-  let userInput: Project = {
+  let userInput: AddProjectInput = {
     title,
+    description: "",
+    label: "",
+    creator: "",
+    imageUrl: "",
+    fundingGoal: 0,
+    totalFundings: 0,
   };
 
   const onSubmit = (e: { preventDefault: () => void }) => {

@@ -1,8 +1,8 @@
-import { Project } from "../utils/types";
+import { AddProjectInput } from "../utils/types";
 
 export const getProjects = async () => _get("/api/projects");
 
-export const addProject = async (project: Project) =>
+export const addProject = async (project: AddProjectInput) =>
   _post("/api/projects", project);
 
 const _get = async (url: RequestInfo) => (await fetch(url)).json();

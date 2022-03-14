@@ -2,14 +2,13 @@ import { AppBar, Box, Toolbar, Button, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 const Nav = () => (
-  <Box sx={{ flexGrow: 1 }}>
+  <Box sx={{ flexGrow: 1, height: 100 }}>
     <AppBar position="sticky">
       <Toolbar>
         <Typography
           variant="h4"
           component="div"
-          sx={{ flexGrow: 1 }}
-          style={{ color: "#ffd700", fontFamily: "Monaco" }}
+          sx={{ flexGrow: 1, color: "#ffd700", fontFamily: "Monaco" }}
         >
           <NavLink to="/">JumpStart</NavLink>
         </Typography>
