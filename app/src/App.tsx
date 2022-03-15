@@ -1,5 +1,7 @@
 import { Container } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { Routes, Route } from "react-router-dom";
 
 import Nav from "./components/Nav";
@@ -12,17 +14,24 @@ import "./App.css";
 import theme from "./utils/theme";
 
 const App = () => {
+  const promise =
+    process.env.REACT_APP_STRIPE_KEY !== undefined
+      ? loadStripe(process.env.REACT_APP_STRIPE_KEY)
+      : null;
+
   return (
     <ThemeProvider {...{ theme }}>
       <Nav />
       <Container>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:projectId" element={<ProjectDetails />} />
-          <Route path="/addProject" element={<AddProject />} />
-          <Route path="/projects/:projectId/fund" element={<FundingForm />} />
-        </Routes>
+        <Elements stripe={promise}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:projectId" element={<ProjectDetails />} />
+            <Route path="/addProject" element={<AddProject />} />
+            <Route path="/projects/:projectId/fund" element={<FundingForm />} />
+          </Routes>
+        </Elements>
       </Container>
     </ThemeProvider>
   );

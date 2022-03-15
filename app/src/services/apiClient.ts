@@ -10,7 +10,7 @@ export const addProject = async (project: AddProjectInput) =>
 
 const _get = async (url: RequestInfo) => (await fetch(url)).json();
 
-const _post = async (url: RequestInfo, body: { title: string }) => {
+const _post = async (url: RequestInfo, body: AddProjectInput) => {
   const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

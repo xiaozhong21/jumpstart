@@ -3,11 +3,13 @@ var express = require("express");
 
 import mime from "mime-types";
 
+import fundingRouter from "./fundingRouter";
 import projectRouter from "./projectRouter";
 
 const app = express();
 
 app.use("/api/projects", projectRouter);
+app.use("/api/funding", fundingRouter);
 
 // Heartbeat URL endpoint
 app.get("/api/ping", (req: Request, res: Response) =>

@@ -38,3 +38,9 @@ export interface FundingFormInput {
   contributor: string;
   amount: number;
 }
+
+export interface FundingDetails {
+  projectId: number;
+  contributor: string;
+  amount: number;
+}
