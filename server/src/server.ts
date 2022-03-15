@@ -20,14 +20,14 @@ if (process.env?.SERVE_REACT?.toLowerCase() === "true") {
   app.use(
     express.static("/app", {
       maxAge: "1d",
-      setHeaders: (res, path) =>
+      setHeaders: (res: Response, path: any) =>
         ["application/json", "text/html"].includes(
           mime.lookup(path).toString(),
         ) && res.setHeader("Cache-Control", "public, max-age=0"),
     }),
   );
 
-  app.get("*", (req, res) => {
+  app.get("*", (req: Request, res: Response) => {
     res.sendFile("/app/index.html");
   });
 }

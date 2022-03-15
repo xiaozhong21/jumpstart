@@ -118,35 +118,41 @@ const FundingForm = () => {
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
-        sx={{ display: "flex", flexDirection: "column", gap: "10px" }}
+        sx={{ display: "flex", flexDirection: "column", gap: "30px" }}
       >
-        <InputLabel htmlFor="contributor">Your Name</InputLabel>
-        <FormHelperText id="component-helper-text">
-          You can also choose to remain anonymous!
-        </FormHelperText>
-        <Controller
-          name="contributor"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <Input {...field} aria-describedby="component-helper-text" />
-          )}
-        />
-        <InputLabel htmlFor="amount">
-          Your Funding Amount ($) <span style={{ color: "red" }}>*</span>
-        </InputLabel>
-        <Controller
-          name="amount"
-          control={control}
-          render={({ field }) => (
-            <Input {...field} type="number" placeholder="100" required />
-          )}
-        />
-        <CardElement
-          id="card-element"
-          options={cardStyle}
-          onChange={handleChange}
-        />
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <InputLabel htmlFor="contributor">Your Name</InputLabel>
+          <FormHelperText id="component-helper-text">
+            You can also choose to remain anonymous!
+          </FormHelperText>
+          <Controller
+            name="contributor"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <Input {...field} aria-describedby="component-helper-text" />
+            )}
+          />
+        </Box>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <InputLabel htmlFor="amount">
+            Your Funding Amount ($) <span style={{ color: "red" }}>*</span>
+          </InputLabel>
+          <Controller
+            name="amount"
+            control={control}
+            render={({ field }) => (
+              <Input {...field} type="number" placeholder="100" required />
+            )}
+          />
+        </Box>
+        <Box mt="10px" mb="10px">
+          <CardElement
+            id="card-element"
+            options={cardStyle}
+            onChange={handleChange}
+          />
+        </Box>
         <Button
           variant="contained"
           type="submit"

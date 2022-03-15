@@ -1,7 +1,6 @@
 FROM node:16-alpine as app
 ARG NODE_ENV=production
-ARG REACT_APP_TITLE
-ARG REACT_APP_SUBTITLE
+ARG REACT_APP_STRIPE_KEY
 RUN npm install -g npm@8
 WORKDIR /app
 COPY ./package* ./
