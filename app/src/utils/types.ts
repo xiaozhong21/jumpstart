@@ -33,3 +33,8 @@ export interface ProgressBarProps {
   fundingGoal: number;
   totalFundings: number;
 }
+
+export interface FundingFormInput {
+  contributor: string;
+  amount: number;
+}

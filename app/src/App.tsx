@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Nav from "./components/Nav";
 import AddProject from "./pages/AddProject";
+import FundingForm from "./pages/FundingForm";
 import Home from "./pages/Home";
 import ProjectDetails from "./pages/ProjectDetails";
 import Projects from "./pages/Projects";
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:projectId" element={<ProjectDetails />} />
           <Route path="/addProject" element={<AddProject />} />
+          <Route path="/projects/:projectId/fund" element={<FundingForm />} />
         </Routes>
       </Container>
     </ThemeProvider>

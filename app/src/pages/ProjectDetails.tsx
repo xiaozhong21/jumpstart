@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Typography, CardMedia, Box, Button } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import ProgressBar from "../components/ProgressBar";
 import * as apiClient from "../services/apiClient";
@@ -31,10 +31,6 @@ const ProjectDetails = () => {
   React.useEffect(() => {
     loadProject();
   }, [loadProject]);
-
-  const handleFunding = () => {
-    alert("clicked!");
-  };
 
   return error === true ? (
     <p>{errorMessage}</p>
@@ -90,9 +86,9 @@ const ProjectDetails = () => {
           <Typography variant="body2" component="div">
             ${project.total_fundings} raised of ${project.funding_goal}
           </Typography>
-          <Button variant="contained" onClick={handleFunding}>
-            Fund It
-          </Button>
+          <Link to={`/projects/${project.project_id}/fund`}>
+            <Button variant="contained">Fund It</Button>
+          </Link>
         </Box>
       </Box>
     </div>
