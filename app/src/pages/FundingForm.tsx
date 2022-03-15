@@ -12,6 +12,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
+import * as apiClient from "../services/apiClient";
 import { FundingFormInput, FundingDetails } from "../utils/types";
 
 const FundingForm = () => {
@@ -54,7 +55,10 @@ const FundingForm = () => {
     createPaymentIntent(fundingDetails);
   };
 
-  const confirmCardPayment = async (clientSecret: string) => {
+  const confirmCardPayment = async (
+    fundingDetails: FundingDetails,
+    clientSecret: string,
+  ) => {
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       // Make  sure to disable form submission until Stripe.js has loaded.
@@ -78,7 +82,9 @@ const FundingForm = () => {
         setError(null);
         setProcessing(false);
         setSucceeded(true);
-        navigate(`/projects/${projectId}`);
+        await apiClient
+          .addProjectFunding(fundingDetails)
+          .then(() => navigate(`/projects/${projectId}`));
       }
     }
   };
@@ -92,10 +98,7 @@ const FundingForm = () => {
       .then((res) => {
         return res.json();
       })
-      // .then((data) => {
-      //   setClientSecret(data.clientSecret);
-      // })
-      .then((data) => confirmCardPayment(data.clientSecret));
+      .then((data) => confirmCardPayment(fundingDetails, data.clientSecret));
   };
 
   const handleChange = async (event: any) => {

@@ -10,7 +10,7 @@ export interface Project {
   created_at: Date;
 }
 
-export interface ProjectFundings {
+export interface ProjectFunding {
   funding_id: number;
   project_id: number;
   contributor: string;

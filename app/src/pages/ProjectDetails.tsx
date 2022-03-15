@@ -5,12 +5,13 @@ import { useParams, Link } from "react-router-dom";
 
 import ProgressBar from "../components/ProgressBar";
 import * as apiClient from "../services/apiClient";
-import { Project, ProjectFundings } from "../utils/types";
+import { Project, ProjectFunding } from "../utils/types";
 
 const ProjectDetails = () => {
   const [project, setProject] = React.useState<Project>();
-  const [projectFundings, setProjectFundings] =
-    React.useState<ProjectFundings>();
+  const [projectFundings, setProjectFundings] = React.useState<
+    ProjectFunding[]
+  >([]);
   const [error, setError] = React.useState<boolean>(false);
   const [errorMessage, setErrorMessage] = React.useState<string>("");
   const { projectId } = useParams<string>();
@@ -30,9 +31,25 @@ const ProjectDetails = () => {
     }
   }, [projectId]);
 
+  const loadProjectFundings = React.useCallback(() => {
+    if (projectId !== undefined) {
+      apiClient
+        .getProjectFundings(projectId)
+        .then((response) => {
+          setProjectFundings(response);
+          setError(false);
+        })
+        .catch((err) => {
+          setError(true);
+          setErrorMessage(err.message);
+        });
+    }
+  }, [projectId]);
+
   React.useEffect(() => {
     loadProject();
-  }, [loadProject]);
+    loadProjectFundings();
+  }, [loadProject, loadProjectFundings]);
 
   return error === true ? (
     <p>{errorMessage}</p>
@@ -91,6 +108,15 @@ const ProjectDetails = () => {
           <Link to={`/projects/${project.project_id}/fund`}>
             <Button variant="contained">Fund It</Button>
           </Link>
+          <Typography>Fundings History</Typography>
+          {projectFundings &&
+            projectFundings.map(
+              ({ funding_id, contributor, amount, created_at }) => (
+                <Typography key={funding_id}>
+                  ${amount} from {contributor} at {created_at}
+                </Typography>
+              ),
+            )}
         </Box>
       </Box>
     </div>

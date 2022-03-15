@@ -20,9 +20,29 @@ projectRouter.get("/:projectId", async (req: Request, res: Response) => {
   }
 });
 
+projectRouter.get(
+  "/:projectId/fundings",
+  async (req: Request, res: Response) => {
+    try {
+      const projectFundings = await db.getProjectFundings(req.params.projectId);
+      res.json(projectFundings);
+    } catch (err: any) {
+      console.error(err);
+    }
+  },
+);
+
 projectRouter.post("/", async (req: Request, res: Response) => {
   const project = await db.addProject(req.body.title);
   res.status(201).json(project);
 });
+
+projectRouter.post(
+  "/:projectId/fundings",
+  async (req: Request, res: Response) => {
+    const projectFunding = await db.addProjectFunding(req.body);
+    res.status(201).json(projectFunding);
+  },
+);
 
 export default projectRouter;
