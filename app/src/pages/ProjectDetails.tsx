@@ -5,10 +5,12 @@ import { useParams, Link } from "react-router-dom";
 
 import ProgressBar from "../components/ProgressBar";
 import * as apiClient from "../services/apiClient";
-import { Project } from "../utils/types";
+import { Project, ProjectFundings } from "../utils/types";
 
 const ProjectDetails = () => {
   const [project, setProject] = React.useState<Project>();
+  const [projectFundings, setProjectFundings] =
+    React.useState<ProjectFundings>();
   const [error, setError] = React.useState<boolean>(false);
   const [errorMessage, setErrorMessage] = React.useState<string>("");
   const { projectId } = useParams<string>();

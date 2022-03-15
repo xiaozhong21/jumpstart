@@ -10,6 +10,14 @@ export interface Project {
   created_at: Date;
 }
 
+export interface ProjectFundings {
+  funding_id: number;
+  project_id: number;
+  contributor: string;
+  amount: number;
+  created_at: Date;
+}
+
 export interface ProjectCardProps {
   title: string;
   description: string;

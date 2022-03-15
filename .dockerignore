@@ -4,4 +4,4 @@
 !app/src
 !package*.json
 !server/package*.json
-!server/src/*.mjs
+!server/src

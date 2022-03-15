@@ -21,6 +21,33 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: fundings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.fundings (
+    funding_id integer NOT NULL,
+    project_id integer,
+    contributor text,
+    amount integer,
+    created_at timestamp without time zone DEFAULT now()
+);
+
+
+--
+-- Name: fundings_funding_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.fundings ALTER COLUMN funding_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.fundings_funding_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: projects; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -52,6 +79,15 @@ ALTER TABLE public.projects ALTER COLUMN project_id ADD GENERATED ALWAYS AS IDEN
 
 
 --
+-- Data for Name: fundings; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.fundings (funding_id, project_id, contributor, amount, created_at) FROM stdin;
+1	1	Jason M	500	2022-03-15 09:30:09.630123
+\.
+
+
+--
 -- Data for Name: projects; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -63,10 +99,25 @@ COPY public.projects (project_id, title, description, label, creator, image_url,
 
 
 --
+-- Name: fundings_funding_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.fundings_funding_id_seq', 1, true);
+
+
+--
 -- Name: projects_project_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.projects_project_id_seq', 3, true);
+
+
+--
+-- Name: fundings fundings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fundings
+    ADD CONSTRAINT fundings_pkey PRIMARY KEY (funding_id);
 
 
 --
@@ -75,6 +126,14 @@ SELECT pg_catalog.setval('public.projects_project_id_seq', 3, true);
 
 ALTER TABLE ONLY public.projects
     ADD CONSTRAINT pk_projects PRIMARY KEY (project_id);
+
+
+--
+-- Name: fundings fundings_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fundings
+    ADD CONSTRAINT fundings_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.projects(project_id);
 
 
 --
