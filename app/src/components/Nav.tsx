@@ -18,6 +18,9 @@ const Nav = () => (
         <NavLink to="/addProject">
           <Button color="inherit">JumpStart Your Project</Button>
         </NavLink>
+        <NavLink to="/dashboard">
+          <Button color="inherit">Dashboard</Button>
+        </NavLink>
       </Toolbar>
     </AppBar>
   </Box>

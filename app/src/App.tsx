@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Nav from "./components/Nav";
 import AddProject from "./pages/AddProject";
+import Dashboard from "./pages/Dashboard";
 import FundingForm from "./pages/FundingForm";
 import Home from "./pages/Home";
 import ProjectDetails from "./pages/ProjectDetails";
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/projects/:projectId" element={<ProjectDetails />} />
             <Route path="/addProject" element={<AddProject />} />
             <Route path="/projects/:projectId/fund" element={<FundingForm />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </Elements>
       </Container>

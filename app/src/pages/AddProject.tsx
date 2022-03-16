@@ -21,9 +21,8 @@ const AddProject = () => {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<ProjectFormInput> = async (data) => {
-    apiClient.addProject(data);
-    console.log(data);
-    // navigate("/projects");
+    await apiClient.addProject(data);
+    navigate("/projects");
   };
 
   return (
