@@ -1,19 +1,27 @@
 import * as React from "react";
 
 import { Box, Grid } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import ProjectCard from "../components/ProjectCard";
 import * as apiClient from "../services/apiClient";
 import { Project } from "../utils/types";
 
 const Dashboard = () => {
-  const [projects, setProjects] = React.useState<Project[]>([]);
+  const [creatorProjects, setCreatorProjects] = React.useState<Project[]>([]);
+  const navigate = useNavigate();
+  const creatorId = 1;
+  const creator = true;
 
-  const loadProjects = async () => setProjects(await apiClient.getProjects());
+  const loadCreatorProjects = async () =>
+    setCreatorProjects(await apiClient.getCreatorProjects(creatorId));
+
+  const handleDelete = () => {
+    alert("deleted!");
+  };
 
   React.useEffect(() => {
-    loadProjects();
+    loadCreatorProjects();
   }, []);
 
   return (
@@ -23,18 +31,19 @@ const Dashboard = () => {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        {projects.map((project: Project) => (
+        {creatorProjects.map((project: Project) => (
           <Grid item xs={2} sm={4} md={4} key={project.project_id}>
-            <Link to={`/projects/${project.project_id}`}>
-              <ProjectCard
-                title={project.title}
-                description={project.description}
-                label={project.label}
-                imageUrl={project.image_url}
-                fundingGoal={project.funding_goal}
-                totalFundings={project.total_fundings}
-              />
-            </Link>
+            <ProjectCard
+              projectId={project.project_id}
+              title={project.title}
+              description={project.description}
+              label={project.label}
+              imageUrl={project.image_url}
+              fundingGoal={project.funding_goal}
+              totalFundings={project.total_fundings}
+              creator={creator}
+              {...{ handleDelete }}
+            />
           </Grid>
         ))}
       </Grid>

@@ -5,11 +5,13 @@ import mime from "mime-types";
 
 import fundingRouter from "./fundingRouter";
 import projectRouter from "./projectRouter";
+import creatorRouter from "./creatorRouter";
 
 const app = express();
 
 app.use("/api/projects", projectRouter);
 app.use("/api/funding", fundingRouter);
+app.use("/api/creators", creatorRouter);
 
 // Heartbeat URL endpoint
 app.get("/api/ping", (req: Request, res: Response) =>

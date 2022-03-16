@@ -19,12 +19,15 @@ export interface ProjectFunding {
 }
 
 export interface ProjectCardProps {
+  projectId: number;
   title: string;
   description: string;
   label: string;
   imageUrl: string;
   fundingGoal: number;
   totalFundings: number;
+  creator: boolean;
+  handleDelete?: () => any;
 }
 
 export interface ProgressBarProps {

@@ -23,6 +23,11 @@ export const getProjectFundings = (projectId: string) =>
     },
   );
 
+export const getCreatorProjects = (creatorId: string) =>
+  db.any("SELECT * FROM projects WHERE creator_id=$<creatorId>", {
+    creatorId,
+  });
+
 export const addProject = ({
   title,
   description,
@@ -46,6 +51,14 @@ export const addProjectFunding = ({ projectId, contributor, amount }) => {
     { projectId, amount },
   );
 };
+
+export const updateProject = (projectId: string, project: any) =>
+  db.one(
+    `UPDATE projects SET title=$<title>, description=$<description>, label=$<label>, image_url=$<imageUrl>, creator=$<creator>, funding_goal=$<fundingGoal>
+    WHERE project_id=$<projectId>
+    RETURNING *`,
+    { projectId, ...project },
+  );
 
 function initDb() {
   let connection: string | IConnectionParameters<IClient>;

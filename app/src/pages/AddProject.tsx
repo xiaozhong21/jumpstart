@@ -11,19 +11,64 @@ import {
   Button,
 } from "@mui/material";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import * as apiClient from "../services/apiClient";
-import { ProjectFormInput } from "../utils/types";
+import { ProjectFormInput, Project } from "../utils/types";
 
 const AddProject = () => {
-  const { control, handleSubmit } = useForm<ProjectFormInput>();
+  const { register, control, handleSubmit, setValue } =
+    useForm<ProjectFormInput>();
   const navigate = useNavigate();
+  const { projectId } = useParams();
+  const [project, setProject] = React.useState<Project>();
+  const [error, setError] = React.useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = React.useState<string>("");
+  const [autopopulate, setAutopopulate] = React.useState<boolean>(true);
+
+  const isAddMode = !projectId;
+
+  const loadProject = React.useCallback(() => {
+    if (projectId !== undefined) {
+      apiClient
+        .getProject(projectId)
+        .then((response) => {
+          setProject(response);
+          setError(false);
+        })
+        .catch((err) => {
+          setError(true);
+          setErrorMessage(err.message);
+        });
+    }
+  }, [projectId]);
 
   const onSubmit: SubmitHandler<ProjectFormInput> = async (data) => {
-    await apiClient.addProject(data);
+    if (isAddMode) {
+      await apiClient.addProject(data);
+    } else {
+      await apiClient.updateProject(projectId, data);
+    }
     navigate("/projects");
   };
+
+  React.useEffect(() => {
+    loadProject();
+  }, [loadProject]);
+
+  React.useEffect(() => {
+    if (!isAddMode) {
+      if (project && autopopulate) {
+        setValue("title", project.title);
+        setValue("description", project.description);
+        setValue("label", project.label);
+        setValue("imageUrl", project.image_url);
+        setValue("creator", project.creator);
+        setValue("fundingGoal", project.funding_goal);
+        setAutopopulate(false);
+      }
+    }
+  });
 
   return (
     <Box
@@ -52,7 +97,12 @@ const AddProject = () => {
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <Input {...field} aria-describedby="title-helper-text" required />
+              <Input
+                {...field}
+                {...register("title")}
+                aria-describedby="title-helper-text"
+                required
+              />
             )}
           />
         </Box>
@@ -67,7 +117,11 @@ const AddProject = () => {
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <Input {...field} aria-describedby="description-helper-text" />
+              <Input
+                {...field}
+                {...register("description")}
+                aria-describedby="description-helper-text"
+              />
             )}
           />
         </Box>
@@ -79,7 +133,7 @@ const AddProject = () => {
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <Select variant="standard" {...field}>
+              <Select variant="standard" {...field} {...register("label")}>
                 <MenuItem value="art">Art</MenuItem>
                 <MenuItem value="tech">Technology</MenuItem>
               </Select>
@@ -97,7 +151,11 @@ const AddProject = () => {
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <Input {...field} aria-describedby="imageUrl-helper-text" />
+              <Input
+                {...field}
+                {...register("imageUrl")}
+                aria-describedby="imageUrl-helper-text"
+              />
             )}
           />
         </Box>
@@ -108,7 +166,9 @@ const AddProject = () => {
             name="creator"
             control={control}
             defaultValue=""
-            render={({ field }) => <Input {...field} />}
+            render={({ field }) => (
+              <Input {...field} {...register("creator")} />
+            )}
           />
         </Box>
 
@@ -120,13 +180,19 @@ const AddProject = () => {
             name="fundingGoal"
             control={control}
             render={({ field }) => (
-              <Input {...field} type="number" placeholder="100" required />
+              <Input
+                {...field}
+                {...register("fundingGoal")}
+                type="number"
+                placeholder="100"
+                required
+              />
             )}
           />
         </Box>
 
         <Button variant="contained" type="submit">
-          Submit
+          {isAddMode ? "Submit" : "Edit"}
         </Button>
       </Box>
     </Box>

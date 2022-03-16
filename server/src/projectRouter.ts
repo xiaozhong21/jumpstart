@@ -37,6 +37,11 @@ projectRouter.post("/", async (req: Request, res: Response) => {
   res.status(201).json(project);
 });
 
+projectRouter.post("/:projectId", async (req: Request, res: Response) => {
+  const updatedProject = await db.updateProject(req.params.projectId, req.body);
+  res.status(201).json(updatedProject);
+});
+
 projectRouter.post(
   "/:projectId/fundings",
   async (req: Request, res: Response) => {

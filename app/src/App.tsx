@@ -32,6 +32,7 @@ const App = () => {
             <Route path="/addProject" element={<AddProject />} />
             <Route path="/projects/:projectId/fund" element={<FundingForm />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/projects/:projectId/edit" element={<AddProject />} />
           </Routes>
         </Elements>
       </Container>

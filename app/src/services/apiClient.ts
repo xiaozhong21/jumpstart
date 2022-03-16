@@ -8,11 +8,19 @@ export const getProject = async (projectId: string) =>
 export const getProjectFundings = async (projectId: string) =>
   _get(`/api/projects/${projectId}/fundings`);
 
+export const getCreatorProjects = async (creatorId: number) =>
+  _get(`/api/creators/${creatorId}/projects`);
+
 export const addProject = async (project: ProjectFormInput) =>
   _post("/api/projects", project);
 
 export const addProjectFunding = async (fundingDetails: FundingDetails) =>
   _post(`/api/projects/${fundingDetails.projectId}/fundings`, fundingDetails);
+
+export const updateProject = async (
+  projectId: string,
+  project: ProjectFormInput,
+) => _post(`/api/projects/${projectId}`, project);
 
 const _get = async (url: RequestInfo) => (await fetch(url)).json();
 
