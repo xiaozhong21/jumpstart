@@ -1,9 +1,13 @@
 import * as dotenv from "dotenv";
 import * as pgPromise from "pg-promise";
+// import pgPromise from "pg-promise";
+
 import {
   IConnectionParameters,
   IClient,
 } from "pg-promise/typescript/pg-subset";
+
+import { ProjectFormInput, FundingDetails } from "./types";
 
 const pgp = pgPromise();
 const db = initDb();
@@ -35,13 +39,17 @@ export const addProject = ({
   imageUrl,
   creator,
   fundingGoal,
-}) =>
+}: ProjectFormInput) =>
   db.one(
     "INSERT INTO projects(title, description, label, image_url, creator, funding_goal) VALUES($<title>, $<description>, $<label>, $<imageUrl>, $<creator>, $<fundingGoal>) RETURNING *",
     { title, description, label, imageUrl, creator, fundingGoal },
   );
 
-export const addProjectFunding = ({ projectId, contributor, amount }) => {
+export const addProjectFunding = ({
+  projectId,
+  contributor,
+  amount,
+}: FundingDetails) => {
   db.one(
     "INSERT INTO fundings(project_id, contributor, amount) VALUES($<projectId>, $<contributor>, $<amount>) RETURNING *",
     { projectId, contributor, amount },
