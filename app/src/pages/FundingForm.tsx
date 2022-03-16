@@ -7,6 +7,7 @@ import {
   FormHelperText,
   Box,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
@@ -18,6 +19,7 @@ import { FundingFormInput, FundingDetails } from "../utils/types";
 const FundingForm = () => {
   const { projectId } = useParams<string>();
   const { control, handleSubmit } = useForm<FundingFormInput>();
+  const [formSubmitted, setFormSubmitted] = React.useState<boolean>(false);
   const navigate = useNavigate();
 
   const [succeeded, setSucceeded] = React.useState<boolean>(false);
@@ -52,6 +54,7 @@ const FundingForm = () => {
       projectId: Number(projectId),
       ...data,
     };
+    setFormSubmitted(true);
     createPaymentIntent(fundingDetails);
   };
 
@@ -117,6 +120,7 @@ const FundingForm = () => {
         gap: "20px",
       }}
     >
+      {formSubmitted && <CircularProgress />}
       <Typography variant="h5">Funding Form for Project {projectId}</Typography>
       <Box
         component="form"
