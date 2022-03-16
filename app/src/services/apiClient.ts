@@ -22,6 +22,9 @@ export const updateProject = async (
   project: ProjectFormInput,
 ) => _post(`/api/projects/${projectId}`, project);
 
+export const deleteProject = async (projectId: number) =>
+  _delete(`/api/projects/${projectId}`);
+
 const _get = async (url: RequestInfo) => (await fetch(url)).json();
 
 const _post = async (
@@ -39,4 +42,21 @@ const _post = async (
   } catch {}
 
   return result;
+};
+
+const _delete = async (url: RequestInfo) =>
+  await _fetch(url, { method: "DELETE" });
+
+const _fetch = async (url: RequestInfo, options: RequestInit | undefined) => {
+  const response = await fetch(url, {
+    ...options,
+    headers: {
+      ...(options?.headers ?? {}),
+      // Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
 };

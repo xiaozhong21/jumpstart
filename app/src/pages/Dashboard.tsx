@@ -9,16 +9,11 @@ import { Project } from "../utils/types";
 
 const Dashboard = () => {
   const [creatorProjects, setCreatorProjects] = React.useState<Project[]>([]);
-  const navigate = useNavigate();
   const creatorId = 1;
   const creator = true;
 
   const loadCreatorProjects = async () =>
     setCreatorProjects(await apiClient.getCreatorProjects(creatorId));
-
-  const handleDelete = () => {
-    alert("deleted!");
-  };
 
   React.useEffect(() => {
     loadCreatorProjects();
@@ -42,7 +37,7 @@ const Dashboard = () => {
               fundingGoal={project.funding_goal}
               totalFundings={project.total_fundings}
               creator={creator}
-              {...{ handleDelete }}
+              {...{ loadCreatorProjects }}
             />
           </Grid>
         ))}

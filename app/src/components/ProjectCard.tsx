@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   Card,
   CardContent,
@@ -12,6 +10,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
+import * as apiClient from "../services/apiClient";
 import { ProjectCardProps } from "../utils/types";
 
 import ProgressBar from "./ProgressBar";
@@ -25,8 +24,13 @@ const ProjectCard = ({
   fundingGoal,
   totalFundings,
   creator,
-  handleDelete,
+  loadCreatorProjects,
 }: ProjectCardProps) => {
+  const handleDelete = async () => {
+    await apiClient.deleteProject(projectId);
+    loadCreatorProjects && loadCreatorProjects();
+  };
+
   return (
     <Box>
       <Card sx={{ maxWidth: 345 }}>

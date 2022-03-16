@@ -187,7 +187,7 @@ ALTER TABLE ONLY public.projects
 --
 
 ALTER TABLE ONLY public.fundings
-    ADD CONSTRAINT fundings_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.projects(project_id);
+    ADD CONSTRAINT fundings_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.projects(project_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -195,7 +195,7 @@ ALTER TABLE ONLY public.fundings
 --
 
 ALTER TABLE ONLY public.projects
-    ADD CONSTRAINT projects_creator_id_fkey FOREIGN KEY (creator_id) REFERENCES public.creators(creator_id);
+    ADD CONSTRAINT projects_creator_id_fkey FOREIGN KEY (creator_id) REFERENCES public.creators(creator_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

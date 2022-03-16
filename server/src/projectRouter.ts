@@ -50,4 +50,13 @@ projectRouter.post(
   },
 );
 
+projectRouter.delete("/:projectId", async (req: Request, res: Response) => {
+  try {
+    await db.deleteProject(req.params.projectId);
+    res.status(204).end();
+  } catch (err: any) {
+    console.error(err);
+  }
+});
+
 export default projectRouter;

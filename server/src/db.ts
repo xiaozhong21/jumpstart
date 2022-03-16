@@ -60,6 +60,11 @@ export const updateProject = (projectId: string, project: any) =>
     { projectId, ...project },
   );
 
+export const deleteProject = (projectId: string) =>
+  db.none("DELETE FROM projects WHERE project_id=$<projectId>", {
+    projectId,
+  });
+
 function initDb() {
   let connection: string | IConnectionParameters<IClient>;
 
