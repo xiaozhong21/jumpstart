@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { Box, Grid } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 import ProjectCard from "../components/ProjectCard";
 import * as apiClient from "../services/apiClient";

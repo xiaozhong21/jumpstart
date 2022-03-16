@@ -17,31 +17,68 @@ import * as apiClient from "../services/apiClient";
 import { ProjectFormInput, Project } from "../utils/types";
 
 const AddProject = () => {
+  const { formContent, isAddMode, error, errorMessage, loadProject } =
+    useMyForm();
+
+  React.useEffect(() => {
+    loadProject();
+  }, [loadProject]);
+
+  return isAddMode ? (
+    formContent
+  ) : error ? (
+    <Typography>{errorMessage}</Typography>
+  ) : (
+    formContent
+  );
+};
+
+const useMyForm = () => {
   const { register, control, handleSubmit, setValue } =
     useForm<ProjectFormInput>();
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const [project, setProject] = React.useState<Project>();
   const [error, setError] = React.useState<boolean>(false);
   const [errorMessage, setErrorMessage] = React.useState<string>("");
-  const [autopopulate, setAutopopulate] = React.useState<boolean>(true);
 
   const isAddMode = !projectId;
+
+  const autopopulate = (project: Project) => {
+    if (!isAddMode) {
+      setValue("title", project.title);
+      setValue("description", project.description);
+      setValue("label", project.label);
+      setValue("imageUrl", project.image_url);
+      setValue("creator", project.creator);
+      setValue("fundingGoal", project.funding_goal);
+    }
+  };
+
+  const clearForm = () => {
+    setValue("title", "");
+    setValue("description", "");
+    setValue("label", "");
+    setValue("imageUrl", "");
+    setValue("creator", "");
+    setValue("fundingGoal", 0);
+  };
 
   const loadProject = React.useCallback(() => {
     if (projectId !== undefined) {
       apiClient
         .getProject(projectId)
         .then((response) => {
-          setProject(response);
+          autopopulate(response);
           setError(false);
         })
         .catch((err) => {
           setError(true);
           setErrorMessage(err.message);
         });
+    } else {
+      clearForm();
     }
-  }, [projectId]);
+  }, [projectId, autopopulate, clearForm]);
 
   const onSubmit: SubmitHandler<ProjectFormInput> = async (data) => {
     if (isAddMode) {
@@ -49,28 +86,10 @@ const AddProject = () => {
     } else {
       await apiClient.updateProject(projectId, data);
     }
-    navigate("/projects");
+    navigate("/dashboard");
   };
 
-  React.useEffect(() => {
-    loadProject();
-  }, [loadProject]);
-
-  React.useEffect(() => {
-    if (!isAddMode) {
-      if (project && autopopulate) {
-        setValue("title", project.title);
-        setValue("description", project.description);
-        setValue("label", project.label);
-        setValue("imageUrl", project.image_url);
-        setValue("creator", project.creator);
-        setValue("fundingGoal", project.funding_goal);
-        setAutopopulate(false);
-      }
-    }
-  });
-
-  return (
+  const formContent = (
     <Box
       sx={{
         display: "flex",
@@ -197,6 +216,8 @@ const AddProject = () => {
       </Box>
     </Box>
   );
+
+  return { formContent, isAddMode, error, errorMessage, loadProject };
 };
 
 export default AddProject;
