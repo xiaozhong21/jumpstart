@@ -27,7 +27,7 @@ export interface ProjectCardProps {
   fundingGoal: number;
   totalFundings: number;
   creator: boolean;
-  loadCreatorProjects?: () => any;
+  loadCreatorProjects?: () => void;
 }
 
 export interface ProgressBarProps {
