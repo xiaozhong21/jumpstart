@@ -33,7 +33,7 @@ projectRouter.get(
 );
 
 projectRouter.post("/", async (req: Request, res: Response) => {
-  const project = await db.addProject(req.body.title);
+  const project = await db.addProject(req.body);
   res.status(201).json(project);
 });
 

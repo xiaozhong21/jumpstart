@@ -1,4 +1,4 @@
-import { AddProjectInput, FundingDetails } from "../utils/types";
+import { ProjectFormInput, FundingDetails } from "../utils/types";
 
 export const getProjects = async () => _get("/api/projects");
 
@@ -8,7 +8,7 @@ export const getProject = async (projectId: string) =>
 export const getProjectFundings = async (projectId: string) =>
   _get(`/api/projects/${projectId}/fundings`);
 
-export const addProject = async (project: AddProjectInput) =>
+export const addProject = async (project: ProjectFormInput) =>
   _post("/api/projects", project);
 
 export const addProjectFunding = async (fundingDetails: FundingDetails) =>
@@ -18,7 +18,7 @@ const _get = async (url: RequestInfo) => (await fetch(url)).json();
 
 const _post = async (
   url: RequestInfo,
-  body: AddProjectInput | FundingDetails,
+  body: ProjectFormInput | FundingDetails,
 ) => {
   const response = await fetch(url, {
     method: "POST",

@@ -23,8 +23,18 @@ export const getProjectFundings = (projectId: string) =>
     },
   );
 
-export const addProject = (title: string) =>
-  db.one("INSERT INTO projects(title) VALUES($<title>) RETURNING *", { title });
+export const addProject = ({
+  title,
+  description,
+  label,
+  imageUrl,
+  creator,
+  fundingGoal,
+}) =>
+  db.one(
+    "INSERT INTO projects(title, description, label, image_url, creator, funding_goal) VALUES($<title>, $<description>, $<label>, $<imageUrl>, $<creator>, $<fundingGoal>) RETURNING *",
+    { title, description, label, imageUrl, creator, fundingGoal },
+  );
 
 export const addProjectFunding = ({ projectId, contributor, amount }) => {
   db.one(

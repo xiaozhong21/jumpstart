@@ -27,16 +27,6 @@ export interface ProjectCardProps {
   totalFundings: number;
 }
 
-export interface AddProjectInput {
-  title: string;
-  description: string;
-  label: string;
-  creator: string;
-  imageUrl: string;
-  fundingGoal: number;
-  totalFundings: number;
-}
-
 export interface ProgressBarProps {
   fundingGoal: number;
   totalFundings: number;
@@ -51,4 +41,13 @@ export interface FundingDetails {
   projectId: number;
   contributor: string;
   amount: number;
+}
+
+export interface ProjectFormInput {
+  title: string;
+  description: string;
+  label: string;
+  creator: string;
+  imageUrl: string;
+  fundingGoal: number;
 }
