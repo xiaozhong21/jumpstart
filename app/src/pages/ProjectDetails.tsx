@@ -108,7 +108,9 @@ const ProjectDetails = () => {
           <Link to={`/projects/${project.project_id}/fund`}>
             <Button variant="contained">Fund It</Button>
           </Link>
-          <Typography>Fundings History</Typography>
+          {projectFundings.length !== 0 ? (
+            <Typography>Fundings History</Typography>
+          ) : null}
           {projectFundings &&
             projectFundings.map(
               ({ funding_id, contributor, amount, created_at }) => (

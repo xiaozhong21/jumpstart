@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import * as dotenv from "dotenv";
-import * as db from "./db";
 
 var express = require("express");
 dotenv.config({ path: "../.env" });
