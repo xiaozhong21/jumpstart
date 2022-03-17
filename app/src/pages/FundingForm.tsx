@@ -49,13 +49,30 @@ const FundingForm = () => {
     },
   };
 
-  const onSubmit: SubmitHandler<FundingFormInput> = async (data) => {
+  const handleFormSubmit: SubmitHandler<FundingFormInput> = async (data) => {
     let fundingDetails = {
       projectId: Number(projectId),
       ...data,
     };
     setFormSubmitted(true);
-    createPaymentIntent(fundingDetails);
+    processPayment(fundingDetails);
+  };
+
+  const processPayment = async (fundingDetails: FundingDetails) => {
+    const paymentIntent = await createPaymentIntent(fundingDetails);
+    await confirmCardPayment(fundingDetails, paymentIntent.clientSecret);
+  };
+
+  const createPaymentIntent = async (fundingDetails: FundingDetails) => {
+    const paymentIntent = await fetch("/api/funding", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(fundingDetails),
+    }).then((res) => {
+      return res.json();
+    });
+
+    return paymentIntent;
   };
 
   const confirmCardPayment = async (
@@ -67,7 +84,9 @@ const FundingForm = () => {
       // Make  sure to disable form submission until Stripe.js has loaded.
       return;
     }
+
     const card = elements.getElement(CardElement);
+
     let payload;
     if (card !== null) {
       payload = await stripe.confirmCardPayment(clientSecret, {
@@ -76,7 +95,7 @@ const FundingForm = () => {
         },
       });
     }
-    console.log(payload);
+
     if (payload !== undefined) {
       if (payload.error) {
         setError(`Payment failed ${payload.error.message}`);
@@ -90,18 +109,6 @@ const FundingForm = () => {
           .then(() => navigate(`/projects/${projectId}`));
       }
     }
-  };
-
-  const createPaymentIntent = async (fundingDetails: FundingDetails) => {
-    const response = await fetch("/api/funding", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(fundingDetails),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => confirmCardPayment(fundingDetails, data.clientSecret));
   };
 
   const handleChange = async (event: any) => {
@@ -124,7 +131,7 @@ const FundingForm = () => {
       <Typography variant="h5">Funding Form for Project {projectId}</Typography>
       <Box
         component="form"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(handleFormSubmit)}
         sx={{ display: "flex", flexDirection: "column", gap: "30px" }}
       >
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
