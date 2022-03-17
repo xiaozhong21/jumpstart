@@ -26,7 +26,6 @@ const FundingForm = () => {
   const [error, setError] = React.useState<string | null>(null);
   const [processing, setProcessing] = React.useState<boolean>();
   const [disabled, setDisabled] = React.useState<boolean>(true);
-  // const [clientSecret, setClientSecret] = React.useState<string>("");
   const stripe = useStripe();
   const elements = useElements();
 
@@ -54,6 +53,7 @@ const FundingForm = () => {
       projectId: Number(projectId),
       ...data,
     };
+    setProcessing(true);
     setFormSubmitted(true);
     processPayment(fundingDetails);
   };
@@ -114,6 +114,7 @@ const FundingForm = () => {
   const handleChange = async (event: any) => {
     // Listen for changes in the CardElement
     // and display any errors as the customer types their card details
+    setFormSubmitted(false);
     setDisabled(event.empty);
     setError(event.error ? event.error.message : "");
   };
@@ -127,7 +128,7 @@ const FundingForm = () => {
         gap: "20px",
       }}
     >
-      {formSubmitted && <CircularProgress />}
+      {formSubmitted && !error && <CircularProgress />}
       <Typography variant="h5">Funding Form for Project {projectId}</Typography>
       <Box
         component="form"
@@ -172,8 +173,12 @@ const FundingForm = () => {
           type="submit"
           disabled={processing || disabled || succeeded}
         >
-          Fund the Project
+          {processing ? "Processing" : "Fund the Project"}
         </Button>
+        {error && <Typography>{error}</Typography>}
+        {succeeded && (
+          <Typography>Your funding went through! Please wait</Typography>
+        )}
       </Box>
     </Box>
   );
