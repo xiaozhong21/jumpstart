@@ -34,10 +34,12 @@ export const getProjectFundings = (projectId: string) =>
     },
   );
 
-export const getCreatorProjects = (creatorId: string) =>
-  db.any("SELECT * FROM projects WHERE creator_id=$<creatorId>", {
-    creatorId,
-  });
+export const getCreatorProjects = (sub: string) =>
+  db.any(
+    `SELECT projects.* FROM projects LEFT JOIN creators on projects.creator_id=creators.creator_id
+    WHERE sub=$<sub>`,
+    { sub },
+  );
 
 export const addOrUpdateUser = (user: Creator) =>
   db.one(
@@ -50,7 +52,7 @@ export const addOrUpdateUser = (user: Creator) =>
     user,
   );
 
-export const addProject = (sub, project: ProjectFormInput) =>
+export const addProject = (sub: string, project: ProjectFormInput) =>
   db.one(
     `INSERT INTO projects(creator_id, title, description, label, image_url, creator, funding_goal)
     VALUES((SELECT creator_id FROM creators WHERE sub=$<sub>), $<title>, $<description>, $<label>, $<imageUrl>, $<creator>, $<fundingGoal>)

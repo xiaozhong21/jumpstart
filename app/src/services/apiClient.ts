@@ -11,14 +11,6 @@ export const getProjectFundings = async (projectId: string) =>
 export const addProjectFunding = async (fundingDetails: FundingDetails) =>
   _post(`/api/projects/${fundingDetails.projectId}/fundings`, fundingDetails);
 
-export const updateProject = async (
-  projectId: string,
-  project: ProjectFormInput,
-) => _post(`/api/projects/${projectId}`, project);
-
-export const deleteProject = async (projectId: number) =>
-  _delete(`/api/projects/${projectId}`);
-
 const _get = async (url: RequestInfo) => (await fetch(url)).json();
 
 const _post = async (

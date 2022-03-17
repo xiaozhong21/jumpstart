@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 var express = require("express");
 
 import * as db from "./db";
-import { ProjectFormInput } from "./types";
 
 const projectRouter = express.Router();
 projectRouter.use(express.json());
@@ -35,17 +34,6 @@ projectRouter.get(
     }
   },
 );
-
-projectRouter.post("/", async (req, res) => {
-  console.log(req.user);
-  const project = await db.addProject(req.user.sub, req.body);
-  res.status(201).json(project);
-});
-
-projectRouter.post("/:projectId", async (req: Request, res: Response) => {
-  const updatedProject = await db.updateProject(req.params.projectId, req.body);
-  res.status(201).json(updatedProject);
-});
 
 projectRouter.post(
   "/:projectId/fundings",

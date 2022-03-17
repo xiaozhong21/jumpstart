@@ -66,7 +66,7 @@ const useMyForm = () => {
   };
 
   const loadProject = React.useCallback(() => {
-    if (projectId !== undefined) {
+    if (projectId !== undefined && apiClient) {
       apiClient
         .getProject(projectId)
         .then((response: Project) => {

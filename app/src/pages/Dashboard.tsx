@@ -8,11 +8,10 @@ import ProjectCard from "../components/ProjectCard";
 import { Project } from "../utils/types";
 
 const Dashboard = () => {
-  const { isAuthenticated } = useAuth0();
   const { loading, apiClient } = useApi();
+  const { isAuthenticated } = useAuth0();
+
   const [creatorProjects, setCreatorProjects] = React.useState<Project[]>([]);
-  // const creatorId = 1;
-  // const creator = true;
 
   const loadCreatorProjects = React.useCallback(
     async () => setCreatorProjects(await apiClient.getCreatorProjects()),
@@ -44,8 +43,8 @@ const Dashboard = () => {
               imageUrl={project.image_url}
               fundingGoal={project.funding_goal}
               totalFundings={project.total_fundings}
-              isAuthenticated={isAuthenticated}
               {...{ loadCreatorProjects }}
+              isAuthenticated={isAuthenticated}
             />
           </Grid>
         ))}
