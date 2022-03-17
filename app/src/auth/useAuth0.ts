@@ -15,7 +15,7 @@ const decorateUser = (user: User | undefined) => {
       family_name: name.last,
       email: null,
       picture: null,
-      sub: user?.sub,
+      ...user,
     };
   }
 };

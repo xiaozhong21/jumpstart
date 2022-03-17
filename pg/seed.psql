@@ -112,8 +112,7 @@ ALTER TABLE public.projects ALTER COLUMN project_id ADD GENERATED ALWAYS AS IDEN
 --
 
 COPY public.creators (creator_id, given_name, family_name, picture, email, sub) FROM stdin;
-1	Xiao	Zhong	picture	email	sub
-2	Tyler	P	picture	email	sub
+1	Xiao	Zhong	https://lh3.googleusercontent.com/a-/AOh14GgQFkOdMqvQDMK_d6rh9fz00GeBJJRS2N1Icy2y=s96-c	xiao.zhong89@gmail.com	google-oauth2|103052387273923521039
 \.
 
 
@@ -141,7 +140,7 @@ COPY public.projects (project_id, creator_id, title, description, label, creator
 -- Name: creators_creator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.creators_creator_id_seq', 2, true);
+SELECT pg_catalog.setval('public.creators_creator_id_seq', 1, true);
 
 
 --
@@ -167,6 +166,14 @@ ALTER TABLE ONLY public.creators
 
 
 --
+-- Name: creators creators_sub_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.creators
+    ADD CONSTRAINT creators_sub_key UNIQUE (sub);
+
+
+--
 -- Name: fundings fundings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -188,14 +195,6 @@ ALTER TABLE ONLY public.projects
 
 ALTER TABLE ONLY public.fundings
     ADD CONSTRAINT fundings_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.projects(project_id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: projects projects_creator_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.projects
-    ADD CONSTRAINT projects_creator_id_fkey FOREIGN KEY (creator_id) REFERENCES public.creators(creator_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
