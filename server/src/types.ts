@@ -54,3 +54,11 @@ export interface ProjectFormInput {
   imageUrl: string;
   fundingGoal: number;
 }
+
+export interface Creator {
+  given_name: string;
+  family_name: string;
+  picture: string;
+  email: string;
+  sub: string;
+}

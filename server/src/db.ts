@@ -7,7 +7,7 @@ import {
   IClient,
 } from "pg-promise/typescript/pg-subset";
 
-import { ProjectFormInput, FundingDetails } from "./types";
+import { ProjectFormInput, FundingDetails, Creator } from "./types";
 
 const pgp = pgPromise();
 const db = initDb();
@@ -31,6 +31,17 @@ export const getCreatorProjects = (creatorId: string) =>
   db.any("SELECT * FROM projects WHERE creator_id=$<creatorId>", {
     creatorId,
   });
+
+export const addOrUpdateUser = (user: Creator) =>
+  db.one(
+    `INSERT INTO creators(given_name, family_name, picture, email, sub)
+      VALUES($<given_name>, $<family_name>, $<picture>, $<email>, $<sub>)
+      ON CONFLICT (sub) DO
+        UPDATE SET given_name = $<given_name>, family_name = $<family_name>,
+          picture = $<picture>, email=$<email>
+      RETURNING *`,
+    user,
+  );
 
 export const addProject = ({
   title,

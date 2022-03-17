@@ -6,6 +6,11 @@ import * as db from "./db";
 const creatorRouter = express.Router();
 creatorRouter.use(express.json());
 
+creatorRouter.post("/", async (req: Request, res: Response) => {
+  const user = await db.addOrUpdateUser(req.body.user);
+  res.status(201).json(user);
+});
+
 creatorRouter.get(
   "/:creatorId/projects",
   async (req: Request, res: Response) => {
