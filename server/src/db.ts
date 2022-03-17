@@ -7,8 +7,15 @@ import {
   IClient,
 } from "pg-promise/typescript/pg-subset";
 
-import { ProjectFormInput, FundingDetails, Creator } from "./types";
+import { ProjectFormInput, FundingDetails } from "./types";
 
+export interface Creator {
+  given_name: string;
+  family_name: string;
+  picture: string;
+  email: string;
+  sub: string;
+}
 const pgp = pgPromise();
 const db = initDb();
 
