@@ -7,9 +7,6 @@ const projectRouter = express.Router();
 projectRouter.use(express.json());
 
 projectRouter.get("/", async (req: Request, res: Response) => {
-  console.log(req);
-  console.log(req.user);
-
   const projects = await db.getProjects();
   res.json(projects);
 });
