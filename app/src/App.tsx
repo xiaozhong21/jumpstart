@@ -1,9 +1,14 @@
+import * as React from "react";
+
 import { Container } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Routes, Route } from "react-router-dom";
 
+import useApi from "./auth/useApi";
+import useAuth0 from "./auth/useAuth0";
+import { Protected } from "./auth/widgets";
 import Nav from "./components/Nav";
 import Dashboard from "./pages/Dashboard";
 import FundingForm from "./pages/FundingForm";
@@ -15,10 +20,19 @@ import "./App.css";
 import theme from "./utils/theme";
 
 const App = () => {
+  const { isAuthenticated, user } = useAuth0();
+  const { loading, apiClient } = useApi();
+
   const promise =
     process.env.REACT_APP_STRIPE_KEY !== undefined
       ? loadStripe(process.env.REACT_APP_STRIPE_KEY)
       : null;
+
+  React.useEffect(() => {
+    if (isAuthenticated && !loading && apiClient) {
+      apiClient.addOrUpdateUser(user);
+    }
+  }, [isAuthenticated, user, loading, apiClient]);
 
   return (
     <ThemeProvider {...{ theme }}>
@@ -29,10 +43,19 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:projectId" element={<ProjectDetails />} />
-            <Route path="/addProject" element={<ProjectForm />} />
             <Route path="/projects/:projectId/fund" element={<FundingForm />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/projects/:projectId/edit" element={<ProjectForm />} />
+            <Route
+              path="/addProject"
+              element={<Protected component={ProjectForm} />}
+            />
+            <Route
+              path="/dashboard"
+              element={<Protected component={Dashboard} />}
+            />
+            <Route
+              path="/projects/:projectId/edit"
+              element={<Protected component={ProjectForm} />}
+            />
           </Routes>
         </Elements>
       </Container>

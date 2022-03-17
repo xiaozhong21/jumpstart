@@ -1,6 +1,9 @@
 import { AppBar, Box, Toolbar, Button, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
+import useAuth0 from "../auth/useAuth0";
+import { Login, Logout } from "../auth/widgets";
+
 const Nav = () => (
   <Box sx={{ flexGrow: 1, height: 100 }}>
     <AppBar position="sticky">
@@ -21,9 +24,26 @@ const Nav = () => (
         <NavLink to="/dashboard">
           <Button color="inherit">Dashboard</Button>
         </NavLink>
+        <Auth />
       </Toolbar>
     </AppBar>
   </Box>
 );
+
+const Auth = () => {
+  const { isAuthenticated, user } = useAuth0();
+  let userPic;
+  if (user && user.picture) userPic = user.picture;
+
+  return isAuthenticated ? (
+    <div>
+      <img src={userPic} alt="" />
+      Hello, {user?.given_name}
+      <Logout />
+    </div>
+  ) : (
+    <Login />
+  );
+};
 
 export default Nav;
