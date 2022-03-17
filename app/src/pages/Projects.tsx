@@ -8,7 +8,6 @@ import { Project } from "../utils/types";
 
 const Projects = () => {
   const [projects, setProjects] = React.useState<Project[]>([]);
-  const creator = false;
 
   const loadProjects = async () => setProjects(await apiClient.getProjects());
 
@@ -33,7 +32,6 @@ const Projects = () => {
               imageUrl={project.image_url}
               fundingGoal={project.funding_goal}
               totalFundings={project.total_fundings}
-              creator={creator}
             />
           </Grid>
         ))}

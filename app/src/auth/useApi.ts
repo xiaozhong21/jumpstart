@@ -1,17 +1,21 @@
 import * as React from "react";
 
-import { Creator, UseApiStates } from "../utils/types";
+import { Creator, UseApiStates, ProjectFormInput } from "../utils/types";
 
 import useAuth0 from "./useAuth0";
 
 const makeApi = (accessToken: string) => {
   const actions = {
     addOrUpdateUser: (user: Creator) => _post("/api/creators", { user }),
+    getCreatorProjects: () => _get(`/api/creator/projects`),
+    getProject: async (projectId: string) => _get(`/api/projects/${projectId}`),
+    addProject: async (project: ProjectFormInput) =>
+      _post("/api/projects", project),
   };
 
   const _get = async (url: string) => (await _fetch(url)).json();
 
-  const _post = async (url: string, body: { user: Creator }) => {
+  const _post = async (url: string, body: any) => {
     const response = await _fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

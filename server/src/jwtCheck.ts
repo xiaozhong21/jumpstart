@@ -1,5 +1,5 @@
-import jwt from "express-jwt";
-import jwks from "jwks-rsa";
+import jwt = require("express-jwt");
+import { expressJwtSecret } from "jwks-rsa";
 import * as dotenv from "dotenv";
 
 dotenv.config({ path: "../.env" });
@@ -8,7 +8,7 @@ const domain = process.env.AUTH0_DOMAIN;
 const audience = process.env.AUTH0_AUDIENCE;
 
 const jwtCheck = jwt({
-  secret: jwks.expressJwtSecret({
+  secret: expressJwtSecret({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,

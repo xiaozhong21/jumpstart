@@ -23,7 +23,7 @@ const ProjectCard = ({
   imageUrl,
   fundingGoal,
   totalFundings,
-  creator,
+  isAuthenticated,
   loadCreatorProjects,
 }: ProjectCardProps) => {
   const handleDelete = async () => {
@@ -80,7 +80,7 @@ const ProjectCard = ({
             </CardContent>
           </CardActionArea>
         </Link>
-        {creator ? (
+        {isAuthenticated ? (
           <CardActions sx={{ display: "flex", justifyContent: "space-evenly" }}>
             <Link to={`/projects/${projectId}/edit`}>
               <Button>Edit</Button>

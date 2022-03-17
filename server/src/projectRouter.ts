@@ -2,11 +2,15 @@ import { Request, Response } from "express";
 var express = require("express");
 
 import * as db from "./db";
+import { ProjectFormInput } from "./types";
 
 const projectRouter = express.Router();
 projectRouter.use(express.json());
 
 projectRouter.get("/", async (req: Request, res: Response) => {
+  console.log(req);
+  console.log(req.user);
+
   const projects = await db.getProjects();
   res.json(projects);
 });
@@ -32,8 +36,9 @@ projectRouter.get(
   },
 );
 
-projectRouter.post("/", async (req: Request, res: Response) => {
-  const project = await db.addProject(req.body);
+projectRouter.post("/", async (req, res) => {
+  console.log(req.user);
+  const project = await db.addProject(req.user.sub, req.body);
   res.status(201).json(project);
 });
 

@@ -1,24 +1,33 @@
 import * as React from "react";
 
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
+import useApi from "../auth/useApi";
+import useAuth0 from "../auth/useAuth0";
 import ProjectCard from "../components/ProjectCard";
-import * as apiClient from "../services/apiClient";
 import { Project } from "../utils/types";
 
 const Dashboard = () => {
+  const { isAuthenticated } = useAuth0();
+  const { loading, apiClient } = useApi();
   const [creatorProjects, setCreatorProjects] = React.useState<Project[]>([]);
-  const creatorId = 1;
-  const creator = true;
+  // const creatorId = 1;
+  // const creator = true;
 
-  const loadCreatorProjects = async () =>
-    setCreatorProjects(await apiClient.getCreatorProjects(creatorId));
+  const loadCreatorProjects = React.useCallback(
+    async () => setCreatorProjects(await apiClient.getCreatorProjects()),
+    [apiClient],
+  );
 
   React.useEffect(() => {
-    loadCreatorProjects();
-  }, []);
+    if (!loading) {
+      loadCreatorProjects();
+    }
+  }, [loading, loadCreatorProjects]);
 
-  return (
+  return !creatorProjects.length ? (
+    <Typography>You have not added any projects yet</Typography>
+  ) : (
     <Box sx={{ flexGrow: 1 }}>
       <Grid
         container
@@ -35,7 +44,7 @@ const Dashboard = () => {
               imageUrl={project.image_url}
               fundingGoal={project.funding_goal}
               totalFundings={project.total_fundings}
-              creator={creator}
+              isAuthenticated={isAuthenticated}
               {...{ loadCreatorProjects }}
             />
           </Grid>

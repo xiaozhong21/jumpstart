@@ -3,15 +3,16 @@ var express = require("express");
 
 import mime from "mime-types";
 
+import jwtCheck from "./jwtCheck";
 import fundingRouter from "./fundingRouter";
 import projectRouter from "./projectRouter";
 import creatorRouter from "./creatorRouter";
 
 const app = express();
 
-app.use("/api/projects", projectRouter);
-app.use("/api/funding", fundingRouter);
-app.use("/api/creators", creatorRouter);
+app.use("/api/projects", jwtCheck, projectRouter);
+app.use("/api/funding", jwtCheck, fundingRouter);
+app.use("/api/creators", jwtCheck, creatorRouter);
 
 // Heartbeat URL endpoint
 app.get("/api/ping", (req: Request, res: Response) =>

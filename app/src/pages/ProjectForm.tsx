@@ -13,7 +13,7 @@ import {
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-import * as apiClient from "../services/apiClient";
+import useApi from "../auth/useApi";
 import { ProjectFormInput, Project } from "../utils/types";
 
 const AddProject = () => {
@@ -34,6 +34,8 @@ const AddProject = () => {
 };
 
 const useMyForm = () => {
+  const { loading, apiClient } = useApi();
+
   const { register, control, handleSubmit, setValue } =
     useForm<ProjectFormInput>();
   const navigate = useNavigate();
@@ -67,11 +69,11 @@ const useMyForm = () => {
     if (projectId !== undefined) {
       apiClient
         .getProject(projectId)
-        .then((response) => {
+        .then((response: Project) => {
           autopopulate(response);
           setError(false);
         })
-        .catch((err) => {
+        .catch((err: { message: React.SetStateAction<string> }) => {
           setError(true);
           setErrorMessage(err.message);
         });
@@ -83,6 +85,7 @@ const useMyForm = () => {
   const onSubmit: SubmitHandler<ProjectFormInput> = async (data) => {
     if (isAddMode) {
       await apiClient.addProject(data);
+      // console.log(data);
     } else {
       await apiClient.updateProject(projectId, data);
     }
@@ -217,7 +220,7 @@ const useMyForm = () => {
     </Box>
   );
 
-  return { formContent, isAddMode, error, errorMessage, loadProject };
+  return { loading, formContent, isAddMode, error, errorMessage, loadProject };
 };
 
 export default AddProject;

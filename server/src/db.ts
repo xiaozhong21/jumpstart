@@ -50,17 +50,12 @@ export const addOrUpdateUser = (user: Creator) =>
     user,
   );
 
-export const addProject = ({
-  title,
-  description,
-  label,
-  imageUrl,
-  creator,
-  fundingGoal,
-}: ProjectFormInput) =>
+export const addProject = (sub, project: ProjectFormInput) =>
   db.one(
-    "INSERT INTO projects(title, description, label, image_url, creator, funding_goal) VALUES($<title>, $<description>, $<label>, $<imageUrl>, $<creator>, $<fundingGoal>) RETURNING *",
-    { title, description, label, imageUrl, creator, fundingGoal },
+    `INSERT INTO projects(creator_id, title, description, label, image_url, creator, funding_goal)
+    VALUES((SELECT creator_id FROM creators WHERE sub=$<sub>), $<title>, $<description>, $<label>, $<imageUrl>, $<creator>, $<fundingGoal>)
+    RETURNING *`,
+    { sub, ...project },
   );
 
 export const addProjectFunding = ({

@@ -12,10 +12,13 @@ creatorRouter.post("/", async (req: Request, res: Response) => {
 });
 
 creatorRouter.get(
-  "/:creatorId/projects",
-  async (req: Request, res: Response) => {
+  "/creator/projects",
+  async (
+    req: { user: { sub: string } },
+    res: { json: (arg0: any[]) => void },
+  ) => {
     try {
-      const creatorProjects = await db.getCreatorProjects(req.params.creatorId);
+      const creatorProjects = await db.getCreatorProjects(req.user.sub);
       res.json(creatorProjects);
     } catch (err: any) {
       console.error(err);

@@ -26,7 +26,7 @@ export interface ProjectCardProps {
   imageUrl: string;
   fundingGoal: number;
   totalFundings: number;
-  creator: boolean;
+  isAuthenticated?: boolean;
   loadCreatorProjects?: () => void;
 }
 
@@ -53,6 +53,7 @@ export interface ProjectFormInput {
   creator: string;
   imageUrl: string;
   fundingGoal: number;
+  user: any;
 }
 
 export interface Creator {
