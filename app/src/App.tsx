@@ -9,7 +9,6 @@ import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import Dashboard from "./pages/Dashboard";
 import FundingForm from "./pages/FundingForm";
-import Home from "./pages/Home";
 import ProjectDetails from "./pages/ProjectDetails";
 import ProjectForm from "./pages/ProjectForm";
 import Projects from "./pages/Projects";
@@ -40,7 +39,7 @@ const App = () => {
       <Container>
         <Elements stripe={promise}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Projects />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:projectId" element={<ProjectDetails />} />
             <Route path="/projects/:projectId/fund" element={<FundingForm />} />
@@ -56,6 +55,7 @@ const App = () => {
               path="/projects/:projectId/edit"
               element={<Protected component={ProjectForm} />}
             />
+            <Route path="/*" element={<Projects />} />
           </Routes>
         </Elements>
       </Container>
