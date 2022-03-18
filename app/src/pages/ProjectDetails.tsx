@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { useParams, Link } from "react-router-dom";
 
+import FundingHistoryModal from "../components/FundingHistoryModal";
 import ProgressBar from "../components/ProgressBar";
 import * as apiClient from "../services/apiClients/usePublicApi";
 import { convertNumToThousandths, timestampFormatter } from "../utils/helpers";
@@ -113,7 +114,9 @@ const ProjectDetails = () => {
         }}
       >
         <Typography variant="h5">{project.title}</Typography>
-        <Typography variant="body2">Created by {project.creator}</Typography>
+        {project.creator ? (
+          <Typography variant="body2">Created by {project.creator}</Typography>
+        ) : null}
         <ProgressBar
           fundingGoal={project.funding_goal}
           totalFundings={project.total_fundings}
@@ -138,8 +141,9 @@ const ProjectDetails = () => {
         >
           <List>
             {projectFundings &&
-              projectFundings.map(
-                ({ funding_id, contributor, amount, created_at }) => (
+              projectFundings
+                .slice(0, 3)
+                .map(({ funding_id, contributor, amount, created_at }) => (
                   <>
                     <Divider />
                     <ListItem key={funding_id}>
@@ -163,10 +167,9 @@ const ProjectDetails = () => {
                       )}
                     </ListItem>
                   </>
-                ),
-              )}
+                ))}
           </List>
-          <Button variant="text">See all</Button>
+          <FundingHistoryModal projectFundings={projectFundings} />
         </Box>
       </Box>
     </Box>

@@ -73,3 +73,7 @@ export interface UseApiStates {
 export interface ProtectedRouteProps {
   component: any;
 }
+
+export interface FundingHistoryModalProps {
+  projectFundings: ProjectFunding[];
+}
