@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { Creator, UseApiStates, ProjectFormInput } from "../../utils/types";
-
 import useAuth0 from "../auth/useAuth0";
 
 const makeApi = (accessToken: string) => {

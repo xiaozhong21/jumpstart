@@ -6,9 +6,6 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Routes, Route } from "react-router-dom";
 
-import useProtectedApi from "./services/apiClients/useProtectedApi";
-import useAuth0 from "./services/auth/useAuth0";
-import { Protected } from "./services/auth/widgets";
 import Nav from "./components/Nav";
 import Dashboard from "./pages/Dashboard";
 import FundingForm from "./pages/FundingForm";
@@ -16,6 +13,9 @@ import Home from "./pages/Home";
 import ProjectDetails from "./pages/ProjectDetails";
 import ProjectForm from "./pages/ProjectForm";
 import Projects from "./pages/Projects";
+import useProtectedApi from "./services/apiClients/useProtectedApi";
+import useAuth0 from "./services/auth/useAuth0";
+import { Protected } from "./services/auth/widgets";
 import "./App.css";
 import theme from "./utils/theme";
 
