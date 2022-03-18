@@ -3,7 +3,6 @@ export interface Project {
   title: string;
   description: string;
   label: string;
-  creator: string;
   image_url: string;
   funding_goal: number;
   total_fundings: number;
@@ -50,7 +49,6 @@ export interface ProjectFormInput {
   title: string;
   description: string;
   label: string;
-  creator: string;
   imageUrl: string;
   fundingGoal: number;
   user: any;

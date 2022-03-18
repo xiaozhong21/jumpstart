@@ -97,11 +97,6 @@ const ProjectDetails = () => {
               gap: "20px",
             }}
           >
-            {project.creator ? (
-              <Typography variant="body2">
-                Created by {project.creator}
-              </Typography>
-            ) : null}
             <ProgressBar
               fundingGoal={project.funding_goal}
               totalFundings={project.total_fundings}
@@ -168,7 +163,9 @@ const ProjectDetails = () => {
                     </>
                   ))}
             </List>
-            <FundingHistoryModal projectFundings={projectFundings} />
+            {projectFundings.length !== 0 ? (
+              <FundingHistoryModal projectFundings={projectFundings} />
+            ) : null}
           </Box>
         </Grid>
       </Grid>

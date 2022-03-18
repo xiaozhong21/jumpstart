@@ -51,7 +51,6 @@ const useMyForm = () => {
       setValue("description", project.description);
       setValue("label", project.label);
       setValue("imageUrl", project.image_url);
-      setValue("creator", project.creator);
       setValue("fundingGoal", project.funding_goal);
     }
   };
@@ -61,7 +60,6 @@ const useMyForm = () => {
     setValue("description", "");
     setValue("label", "");
     setValue("imageUrl", "");
-    setValue("creator", "");
     setValue("fundingGoal", 0);
   };
 
@@ -178,18 +176,6 @@ const useMyForm = () => {
                 {...register("imageUrl")}
                 aria-describedby="imageUrl-helper-text"
               />
-            )}
-          />
-        </Box>
-
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-          <InputLabel htmlFor="creator">Your Name</InputLabel>
-          <Controller
-            name="creator"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <Input {...field} {...register("creator")} />
             )}
           />
         </Box>

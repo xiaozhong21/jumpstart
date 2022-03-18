@@ -85,7 +85,6 @@ CREATE TABLE public.projects (
     title text NOT NULL,
     description text,
     label text,
-    creator text,
     image_url text,
     funding_goal integer NOT NULL,
     total_fundings integer DEFAULT 0,
@@ -113,6 +112,7 @@ ALTER TABLE public.projects ALTER COLUMN project_id ADD GENERATED ALWAYS AS IDEN
 
 COPY public.creators (creator_id, given_name, family_name, picture, email, sub) FROM stdin;
 1	Xiao	Zhong	https://lh3.googleusercontent.com/a-/AOh14GgQFkOdMqvQDMK_d6rh9fz00GeBJJRS2N1Icy2y=s96-c	xiao.zhong89@gmail.com	google-oauth2|103052387273923521039
+2	Xiao	Zhong	https://lh3.googleusercontent.com/a-/AOh14GgMv5Q69Uf33jE0LTonnZ_6DsiVX3qPSjfrECIx=s96-c	xzhong.dev@gmail.com	google-oauth2|114366457166198742070
 \.
 
 
@@ -129,10 +129,10 @@ COPY public.fundings (funding_id, project_id, contributor, amount, created_at) F
 -- Data for Name: projects; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.projects (project_id, creator_id, title, description, label, creator, image_url, funding_goal, total_fundings, created_at) FROM stdin;
-1	1	My awesome project	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.	tech	xiao zhong	https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2669&q=80	1000	500	2022-03-16 04:07:09.488223
-2	1	The best idea ever	Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit	education	Tyler P	https://images.unsplash.com/photo-1601807576163-587225545555?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1973&q=80	15000	3000	2022-03-16 04:07:09.525069
-3	2	The world needs this product	At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga	art	Cindy Smith	https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2490&q=80	5000	3500	2022-03-16 04:07:09.540352
+COPY public.projects (project_id, creator_id, title, description, label, image_url, funding_goal, total_fundings, created_at) FROM stdin;
+1	1	My awesome project	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.	tech	https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2669&q=80	1000	500	2022-03-16 04:07:09.488223
+2	1	The best idea ever	Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit	education	https://images.unsplash.com/photo-1601807576163-587225545555?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1973&q=80	15000	3000	2022-03-16 04:07:09.525069
+3	2	The world needs this product	At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga	art	https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2490&q=80	5000	3500	2022-03-16 04:07:09.540352
 \.
 
 
@@ -140,7 +140,7 @@ COPY public.projects (project_id, creator_id, title, description, label, creator
 -- Name: creators_creator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.creators_creator_id_seq', 1, true);
+SELECT pg_catalog.setval('public.creators_creator_id_seq', 45, true);
 
 
 --
