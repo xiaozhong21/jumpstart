@@ -1,10 +1,24 @@
 import * as React from "react";
 
-import { Typography, CardMedia, Box, Button } from "@mui/material";
+import LoyaltyTwoToneIcon from "@mui/icons-material/LoyaltyTwoTone";
+import {
+  Typography,
+  CardMedia,
+  Box,
+  Button,
+  Card,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Divider,
+} from "@mui/material";
 import { useParams, Link } from "react-router-dom";
 
 import ProgressBar from "../components/ProgressBar";
 import * as apiClient from "../services/apiClients/usePublicApi";
+import { convertNumToThousandths, timestampFormatter } from "../utils/helpers";
 import { Project, ProjectFunding } from "../utils/types";
 
 const ProjectDetails = () => {
@@ -56,72 +70,106 @@ const ProjectDetails = () => {
   ) : !project ? (
     <p>Loading...</p>
   ) : (
-    <div style={{ width: "100%" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        gap: "10px",
+        justifyContent: "space-evenly",
+      }}
+    >
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          gap: "10px",
-          justifyContent: "space-evenly",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          gap: "20px",
+          width: "60%",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            gap: "20px",
-            width: "60%",
-          }}
-        >
+        <Card>
           <CardMedia
             component="img"
             height="300"
             image={project.image_url}
             alt={project.title}
           />
-          <Typography variant="body2" component="div">
-            {project.description}
-          </Typography>
-        </Box>
+        </Card>
+        <Typography variant="body2" component="div">
+          {project.description}
+        </Typography>
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          width: "30%",
+          gap: "20px",
+        }}
+      >
+        <Typography variant="h5">{project.title}</Typography>
+        <Typography variant="body2">Created by {project.creator}</Typography>
+        <ProgressBar
+          fundingGoal={project.funding_goal}
+          totalFundings={project.total_fundings}
+        />
+        <Typography variant="body1" component="div">
+          <span style={{ fontSize: "x-large", fontWeight: "20px" }}>
+            ${convertNumToThousandths(project.total_fundings)}
+          </span>{" "}
+          raised of ${convertNumToThousandths(project.funding_goal)}
+        </Typography>
+
+        <Link to={`/projects/${project.project_id}/fund`}>
+          <Button variant="contained">Fund the Project</Button>
+        </Link>
+
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-start",
             alignItems: "center",
-            width: "30%",
-            gap: "20px",
           }}
         >
-          <Typography variant="h5">{project.title}</Typography>
-          <Typography>Created by {project.creator}</Typography>
-          <ProgressBar
-            fundingGoal={project.funding_goal}
-            totalFundings={project.total_fundings}
-          />
-          <Typography variant="body2" component="div">
-            ${project.total_fundings} raised of ${project.funding_goal}
-          </Typography>
-          <Link to={`/projects/${project.project_id}/fund`}>
-            <Button variant="contained">Fund It</Button>
-          </Link>
-          {projectFundings.length !== 0 ? (
-            <Typography>Fundings History</Typography>
-          ) : null}
-          {projectFundings &&
-            projectFundings.map(
-              ({ funding_id, contributor, amount, created_at }) => (
-                <Typography key={funding_id}>
-                  ${amount} from {contributor} at {created_at}
-                </Typography>
-              ),
-            )}
+          <List>
+            {projectFundings &&
+              projectFundings.map(
+                ({ funding_id, contributor, amount, created_at }) => (
+                  <>
+                    <Divider />
+                    <ListItem key={funding_id}>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <LoyaltyTwoToneIcon sx={{ color: "white" }} />
+                        </Avatar>
+                      </ListItemAvatar>
+                      {contributor ? (
+                        <ListItemText
+                          primary={`$${convertNumToThousandths(
+                            amount,
+                          )} from ${contributor}`}
+                          secondary={timestampFormatter(created_at)}
+                        />
+                      ) : (
+                        <ListItemText
+                          primary={`$${convertNumToThousandths(amount)}`}
+                          secondary={timestampFormatter(created_at)}
+                        />
+                      )}
+                    </ListItem>
+                  </>
+                ),
+              )}
+          </List>
+          <Button variant="text">See all</Button>
         </Box>
       </Box>
-    </div>
+    </Box>
   );
 };
 

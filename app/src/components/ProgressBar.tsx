@@ -7,7 +7,7 @@ const ProgressBar = ({ fundingGoal, totalFundings }: ProgressBarProps) => {
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
-      <Box sx={{ width: "100%", mr: 1, height: 20, display: "table" }}>
+      <Box sx={{ width: "100%", mr: 1, height: 10, display: "table" }}>
         <LinearProgress
           variant="determinate"
           value={progress}
