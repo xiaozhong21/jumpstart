@@ -7,11 +7,11 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Routes, Route } from "react-router-dom";
 
 import Nav from "./components/Nav";
-import Dashboard from "./pages/Dashboard";
-import FundingForm from "./pages/FundingForm";
-import ProjectDetails from "./pages/ProjectDetails";
-import ProjectForm from "./pages/ProjectForm";
-import Projects from "./pages/Projects";
+import DashboardController from "./pages/Dashboard/DashboardController";
+import FundingFormController from "./pages/FundingForm/FundingFormController";
+import ProjectDetailsController from "./pages/ProjectDetails/ProjectDetailsController";
+import ProjectFormController from "./pages/ProjectForm/ProjectFormController";
+import ProjectListController from "./pages/ProjectList/ProjectListController";
 import useProtectedApi from "./services/apiClients/useProtectedApi";
 import useAuth0 from "./services/auth/useAuth0";
 import { Protected } from "./services/auth/widgets";
@@ -39,23 +39,29 @@ const App = () => {
       <Container>
         <Elements stripe={promise}>
           <Routes>
-            <Route path="/" element={<Projects />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/:projectId" element={<ProjectDetails />} />
-            <Route path="/projects/:projectId/fund" element={<FundingForm />} />
+            <Route path="/" element={<ProjectListController />} />
+            <Route path="/projects" element={<ProjectListController />} />
+            <Route
+              path="/projects/:projectId"
+              element={<ProjectDetailsController />}
+            />
+            <Route
+              path="/projects/:projectId/fund"
+              element={<FundingFormController />}
+            />
             <Route
               path="/addProject"
-              element={<Protected component={ProjectForm} />}
+              element={<Protected component={ProjectFormController} />}
             />
             <Route
               path="/dashboard"
-              element={<Protected component={Dashboard} />}
+              element={<Protected component={DashboardController} />}
             />
             <Route
               path="/projects/:projectId/edit"
-              element={<Protected component={ProjectForm} />}
+              element={<Protected component={ProjectFormController} />}
             />
-            <Route path="/*" element={<Projects />} />
+            <Route path="/*" element={<ProjectListController />} />
           </Routes>
         </Elements>
       </Container>

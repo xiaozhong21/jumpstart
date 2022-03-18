@@ -13,10 +13,10 @@ import {
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-import useProtectedApi from "../services/apiClients/useProtectedApi";
-import { ProjectFormInput, Project } from "../utils/types";
+import useProtectedApi from "../../services/apiClients/useProtectedApi";
+import { ProjectFormInput, Project } from "../../utils/types";
 
-const AddProject = () => {
+const ProjectFormController = () => {
   const { formContent, isAddMode, error, errorMessage, loadProject } =
     useMyForm();
 
@@ -209,4 +209,4 @@ const useMyForm = () => {
   return { loading, formContent, isAddMode, error, errorMessage, loadProject };
 };
 
-export default AddProject;
+export default ProjectFormController;

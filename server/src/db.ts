@@ -54,8 +54,8 @@ export const addOrUpdateUser = (user: Creator) =>
 
 export const addProject = (sub: string, project: ProjectFormInput) =>
   db.one(
-    `INSERT INTO projects(creator_id, title, description, label, image_url, creator, funding_goal)
-    VALUES((SELECT creator_id FROM creators WHERE sub=$<sub>), $<title>, $<description>, $<label>, $<imageUrl>, $<creator>, $<fundingGoal>)
+    `INSERT INTO projects(creator_id, title, description, label, image_url, funding_goal)
+    VALUES((SELECT creator_id FROM creators WHERE sub=$<sub>), $<title>, $<description>, $<label>, $<imageUrl>, $<fundingGoal>)
     RETURNING *`,
     { sub, ...project },
   );
@@ -77,7 +77,7 @@ export const addProjectFunding = ({
 
 export const updateProject = (projectId: string, project: any) =>
   db.one(
-    `UPDATE projects SET title=$<title>, description=$<description>, label=$<label>, image_url=$<imageUrl>, creator=$<creator>, funding_goal=$<fundingGoal>
+    `UPDATE projects SET title=$<title>, description=$<description>, label=$<label>, image_url=$<imageUrl>, funding_goal=$<fundingGoal>
     WHERE project_id=$<projectId>
     RETURNING *`,
     { projectId, ...project },

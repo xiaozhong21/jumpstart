@@ -13,10 +13,10 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-import * as apiClient from "../services/apiClients/usePublicApi";
-import { FundingFormInput, FundingDetails } from "../utils/types";
+import * as apiClient from "../../services/apiClients/usePublicApi";
+import { FundingFormInput, FundingDetails } from "../../utils/types";
 
-const FundingForm = () => {
+const FundingFormController = () => {
   const { projectId } = useParams<string>();
   const { control, handleSubmit } = useForm<FundingFormInput>();
   const [formSubmitted, setFormSubmitted] = React.useState<boolean>(false);
@@ -184,4 +184,4 @@ const FundingForm = () => {
   );
 };
 
-export default FundingForm;
+export default FundingFormController;

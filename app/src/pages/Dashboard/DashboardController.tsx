@@ -2,12 +2,12 @@ import * as React from "react";
 
 import { Box, Grid, Typography } from "@mui/material";
 
-import ProjectCard from "../components/ProjectCard";
-import useProtectedApi from "../services/apiClients/useProtectedApi";
-import useAuth0 from "../services/auth/useAuth0";
-import { Project } from "../utils/types";
+import ProjectCard from "../../components/ProjectCard";
+import useProtectedApi from "../../services/apiClients/useProtectedApi";
+import useAuth0 from "../../services/auth/useAuth0";
+import { Project } from "../../utils/types";
 
-const Dashboard = () => {
+const DashboardController = () => {
   const { loading, apiClient } = useProtectedApi();
   const { isAuthenticated } = useAuth0();
 
@@ -53,4 +53,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardController;

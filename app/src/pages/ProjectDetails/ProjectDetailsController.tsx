@@ -19,14 +19,17 @@ import {
 } from "@mui/material";
 import { useParams, Link } from "react-router-dom";
 
-import FundingHistoryModal from "../components/FundingHistoryModal";
-import ProgressBar from "../components/ProgressBar";
-import * as apiClient from "../services/apiClients/usePublicApi";
-import { convertNumToThousandths, timestampFormatter } from "../utils/helpers";
-import theme from "../utils/theme";
-import { Project, ProjectFunding } from "../utils/types";
+import FundingHistoryModal from "../../components/FundingHistoryModal";
+import ProgressBar from "../../components/ProgressBar";
+import * as apiClient from "../../services/apiClients/usePublicApi";
+import {
+  convertNumToThousandths,
+  timestampFormatter,
+} from "../../utils/helpers";
+import theme from "../../utils/theme";
+import { Project, ProjectFunding } from "../../utils/types";
 
-const ProjectDetails = () => {
+const ProjectDetailsController = () => {
   const [project, setProject] = React.useState<Project>();
   const [projectFundings, setProjectFundings] = React.useState<
     ProjectFunding[]
@@ -255,4 +258,4 @@ const ProjectDetails = () => {
   );
 };
 
-export default ProjectDetails;
+export default ProjectDetailsController;

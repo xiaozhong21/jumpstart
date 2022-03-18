@@ -2,11 +2,11 @@ import * as React from "react";
 
 import { Box, Grid } from "@mui/material";
 
-import ProjectCard from "../components/ProjectCard";
-import * as apiClient from "../services/apiClients/usePublicApi";
-import { Project } from "../utils/types";
+import ProjectCard from "../../components/ProjectCard";
+import * as apiClient from "../../services/apiClients/usePublicApi";
+import { Project } from "../../utils/types";
 
-const Projects = () => {
+const ProjectListController = () => {
   const [projects, setProjects] = React.useState<Project[]>([]);
 
   const loadProjects = async () => setProjects(await apiClient.getProjects());
@@ -40,4 +40,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default ProjectListController;
