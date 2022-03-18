@@ -1,6 +1,8 @@
 import * as React from "react";
 
+import LabelIcon from "@mui/icons-material/Label";
 import LoyaltyTwoToneIcon from "@mui/icons-material/LoyaltyTwoTone";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import {
   Grid,
   Typography,
@@ -21,6 +23,7 @@ import FundingHistoryModal from "../components/FundingHistoryModal";
 import ProgressBar from "../components/ProgressBar";
 import * as apiClient from "../services/apiClients/usePublicApi";
 import { convertNumToThousandths, timestampFormatter } from "../utils/helpers";
+import theme from "../utils/theme";
 import { Project, ProjectFunding } from "../utils/types";
 
 const ProjectDetails = () => {
@@ -94,23 +97,88 @@ const ProjectDetails = () => {
               flexDirection: "column",
               justifyContent: "flex-start",
               alignItems: "space-between",
-              gap: "20px",
+              gap: "15px",
             }}
           >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                gap: 2,
+              }}
+            >
+              <LabelIcon sx={{ color: "purple" }} />
+              <Typography sx={{ color: "purple", fontSize: "small" }}>
+                {project.label}
+              </Typography>
+            </Box>
+
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                variant="body1"
+                component="div"
+                sx={{ fontSize: "x-large", fontWeight: "900" }}
+              >
+                ${convertNumToThousandths(project.total_fundings)}
+              </Typography>
+              <Typography>
+                <span style={{ fontSize: "small", color: "grey" }}>
+                  raised of ${convertNumToThousandths(project.funding_goal)}{" "}
+                  goal
+                </span>
+              </Typography>
+            </Box>
+
             <ProgressBar
               fundingGoal={project.funding_goal}
               totalFundings={project.total_fundings}
             />
-            <Typography variant="body1" component="div">
-              <span style={{ fontSize: "x-large", fontWeight: "20px" }}>
-                ${convertNumToThousandths(project.total_fundings)}
-              </span>{" "}
-              raised of ${convertNumToThousandths(project.funding_goal)}
-            </Typography>
+            {projectFundings.length !== 0 ? (
+              <Box
+                sx={{ display: "flex", justifyContent: "flex-start", gap: 2 }}
+              >
+                <TrendingUpIcon sx={{ color: "#00807b" }} />
+                <Typography
+                  sx={{
+                    color: "#00807b",
+                    fontSize: "small",
+                    fontStyle: "italic",
+                  }}
+                >
+                  {projectFundings.length === 1
+                    ? "1 total funding"
+                    : `${projectFundings.length} total fundings`}{" "}
+                </Typography>
+              </Box>
+            ) : (
+              <Box
+                sx={{ display: "flex", justifyContent: "flex-start", gap: 2 }}
+              >
+                <TrendingUpIcon sx={{ color: "#00807b" }} />
+                <Typography
+                  sx={{
+                    color: "#00807b",
+                    fontSize: "small",
+                    fontStyle: "italic",
+                  }}
+                >
+                  Be the first to contribute to its initial seed funding!
+                </Typography>
+              </Box>
+            )}
 
             <Box sx={{ display: "flex", justifyContent: "center", mt: "20px" }}>
               <Link to={`/projects/${project.project_id}/fund`}>
-                <Button variant="contained">Fund the Project</Button>
+                <Button variant="contained" sx={{ backgroundColor: "purple" }}>
+                  Fund the Project
+                </Button>
               </Link>
             </Box>
           </Box>
