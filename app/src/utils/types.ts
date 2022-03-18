@@ -75,3 +75,9 @@ export interface ProtectedRouteProps {
 export interface FundingHistoryModalProps {
   projectFundings: ProjectFunding[];
 }
+
+export interface DashboardViewProps {
+  creatorProjects: Project[];
+  isAuthenticated: boolean;
+  loadCreatorProjects: () => void;
+}
