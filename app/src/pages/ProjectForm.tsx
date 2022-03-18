@@ -13,7 +13,7 @@ import {
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-import useApi from "../auth/useApi";
+import useProtectedApi from "../services/apiClients/useProtectedApi";
 import { ProjectFormInput, Project } from "../utils/types";
 
 const AddProject = () => {
@@ -34,7 +34,7 @@ const AddProject = () => {
 };
 
 const useMyForm = () => {
-  const { loading, apiClient } = useApi();
+  const { loading, apiClient } = useProtectedApi();
 
   const { register, control, handleSubmit, setValue } =
     useForm<ProjectFormInput>();

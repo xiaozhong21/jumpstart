@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { useNavigate, NavLink } from "react-router-dom";
 
-import useAuth0 from "../auth/useAuth0";
+import useAuth0 from "../services/auth/useAuth0";
 
 const Nav = () => {
   const { isAuthenticated, user } = useAuth0();

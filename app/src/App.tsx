@@ -6,9 +6,9 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Routes, Route } from "react-router-dom";
 
-import useApi from "./auth/useApi";
-import useAuth0 from "./auth/useAuth0";
-import { Protected } from "./auth/widgets";
+import useProtectedApi from "./services/apiClients/useProtectedApi";
+import useAuth0 from "./services/auth/useAuth0";
+import { Protected } from "./services/auth/widgets";
 import Nav from "./components/Nav";
 import Dashboard from "./pages/Dashboard";
 import FundingForm from "./pages/FundingForm";
@@ -21,7 +21,7 @@ import theme from "./utils/theme";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
-  const { loading, apiClient } = useApi();
+  const { loading, apiClient } = useProtectedApi();
 
   const promise =
     process.env.REACT_APP_STRIPE_KEY !== undefined

@@ -1,4 +1,4 @@
-import { ProjectFormInput, FundingDetails } from "../utils/types";
+import { ProjectFormInput, FundingDetails } from "../../utils/types";
 
 export const getProjects = async () => _get("/api/projects");
 

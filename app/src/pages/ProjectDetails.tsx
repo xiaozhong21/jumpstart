@@ -4,7 +4,7 @@ import { Typography, CardMedia, Box, Button } from "@mui/material";
 import { useParams, Link } from "react-router-dom";
 
 import ProgressBar from "../components/ProgressBar";
-import * as apiClient from "../services/apiClient";
+import * as apiClient from "../services/apiClients/usePublicApi";
 import { Project, ProjectFunding } from "../utils/types";
 
 const ProjectDetails = () => {

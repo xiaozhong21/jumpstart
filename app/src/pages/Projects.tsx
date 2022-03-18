@@ -3,7 +3,7 @@ import * as React from "react";
 import { Box, Grid } from "@mui/material";
 
 import ProjectCard from "../components/ProjectCard";
-import * as apiClient from "../services/apiClient";
+import * as apiClient from "../services/apiClients/usePublicApi";
 import { Project } from "../utils/types";
 
 const Projects = () => {

@@ -2,13 +2,13 @@ import * as React from "react";
 
 import { Box, Grid, Typography } from "@mui/material";
 
-import useApi from "../auth/useApi";
-import useAuth0 from "../auth/useAuth0";
+import useProtectedApi from "../services/apiClients/useProtectedApi";
+import useAuth0 from "../services/auth/useAuth0";
 import ProjectCard from "../components/ProjectCard";
 import { Project } from "../utils/types";
 
 const Dashboard = () => {
-  const { loading, apiClient } = useApi();
+  const { loading, apiClient } = useProtectedApi();
   const { isAuthenticated } = useAuth0();
 
   const [creatorProjects, setCreatorProjects] = React.useState<Project[]>([]);

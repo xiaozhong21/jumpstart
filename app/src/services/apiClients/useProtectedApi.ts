@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Creator, UseApiStates, ProjectFormInput } from "../utils/types";
+import { Creator, UseApiStates, ProjectFormInput } from "../../utils/types";
 
-import useAuth0 from "./useAuth0";
+import useAuth0 from "../auth/useAuth0";
 
 const makeApi = (accessToken: string) => {
   const actions = {
@@ -51,7 +51,7 @@ const makeApi = (accessToken: string) => {
   return actions;
 };
 
-const useApi = () => {
+const useProtectedApi = () => {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [state, setState] = React.useState<UseApiStates>({
     loading: true,
@@ -79,4 +79,4 @@ const useApi = () => {
   return state;
 };
 
-export default useApi;
+export default useProtectedApi;

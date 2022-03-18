@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-import useApi from "../auth/useApi";
+import useProtectedApi from "../services/apiClients/useProtectedApi";
 import { ProjectCardProps } from "../utils/types";
 
 import ProgressBar from "./ProgressBar";
@@ -26,7 +26,7 @@ const ProjectCard = ({
   isAuthenticated,
   loadCreatorProjects,
 }: ProjectCardProps) => {
-  const { apiClient } = useApi();
+  const { apiClient } = useProtectedApi();
 
   const handleDelete = async () => {
     await apiClient.deleteProject(projectId);
