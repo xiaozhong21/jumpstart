@@ -108,8 +108,8 @@ const ProjectDetails = () => {
                 gap: 2,
               }}
             >
-              <LabelIcon sx={{ color: "purple" }} />
-              <Typography sx={{ color: "purple", fontSize: "small" }}>
+              <LabelIcon sx={{ color: "#00807b" }} />
+              <Typography sx={{ color: "#00807b", fontSize: "small" }}>
                 {project.label}
               </Typography>
             </Box>
@@ -174,10 +174,24 @@ const ProjectDetails = () => {
               </Box>
             )}
 
-            <Box sx={{ display: "flex", justifyContent: "center", mt: "20px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                mt: "20px",
+              }}
+            >
               <Link to={`/projects/${project.project_id}/fund`}>
-                <Button variant="contained" sx={{ backgroundColor: "purple" }}>
-                  Fund the Project
+                <Button
+                  variant="contained"
+                  sx={{
+                    color: "black",
+                    fontWeight: "900",
+                    backgroundImage:
+                      "linear-gradient(rgb(253, 185, 51) 35.42%, rgb(245, 129, 49) 139.58%)",
+                  }}
+                >
+                  Fund It Now
                 </Button>
               </Link>
             </Box>
