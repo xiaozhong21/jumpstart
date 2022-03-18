@@ -35,8 +35,8 @@ const FundingHistoryModal = ({ projectFundings }: FundingHistoryModalProps) => {
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
-      <Button onClick={handleOpen}>See all</Button>
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Button onClick={handleOpen}>See all fundings</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -83,7 +83,7 @@ const FundingHistoryModal = ({ projectFundings }: FundingHistoryModalProps) => {
           </Typography> */}
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 };
 
