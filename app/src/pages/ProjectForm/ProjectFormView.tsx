@@ -51,7 +51,6 @@ const ProjectFormView = ({
           <Controller
             name="title"
             control={control}
-            defaultValue=""
             render={({ field }) => (
               <Input
                 {...field}
@@ -72,7 +71,6 @@ const ProjectFormView = ({
           <Controller
             name="description"
             control={control}
-            defaultValue=""
             render={({ field }) => (
               <TextareaAutosize
                 minRows={3}
@@ -89,7 +87,6 @@ const ProjectFormView = ({
           <Controller
             name="label"
             control={control}
-            defaultValue=""
             render={({ field }) => (
               <Select variant="standard" {...field} {...register("label")}>
                 <MenuItem value="art">Art</MenuItem>
@@ -108,7 +105,6 @@ const ProjectFormView = ({
           <Controller
             name="imageUrl"
             control={control}
-            defaultValue=""
             render={({ field }) => (
               <Input
                 {...field}

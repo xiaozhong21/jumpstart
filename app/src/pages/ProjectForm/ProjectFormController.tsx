@@ -12,7 +12,12 @@ const ProjectFormController = () => {
   const { loading, apiClient } = useProtectedApi();
 
   const { register, control, handleSubmit, setValue, formState } =
-    useForm<ProjectFormInput>();
+    useForm<ProjectFormInput>({
+      defaultValues: {
+        imageUrl:
+          "https://github.com/xiaozhong21/Investory/blob/main/docs/images/logo.png?raw=true",
+      },
+    });
   const navigate = useNavigate();
   const { projectId } = useParams();
   const [project, setProject] = React.useState<Project>();
@@ -36,7 +41,7 @@ const ProjectFormController = () => {
     setValue("description", "");
     setValue("label", "");
     setValue("imageUrl", "");
-    setValue("fundingGoal", 0);
+    setValue("fundingGoal", 1000);
   };
 
   const loadProject = React.useCallback(() => {
