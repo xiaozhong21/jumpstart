@@ -22,6 +22,8 @@ const FundingFormView = ({
   succeeded,
   disabled,
   processing,
+  register,
+  watch,
 }: FundingFormViewProps) => {
   const cardStyle = {
     style: {
@@ -69,7 +71,11 @@ const FundingFormView = ({
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <Input {...field} aria-describedby="component-helper-text" />
+              <Input
+                {...field}
+                {...register("contributor")}
+                aria-describedby="component-helper-text"
+              />
             )}
           />
         </Box>
@@ -81,7 +87,13 @@ const FundingFormView = ({
             name="amount"
             control={control}
             render={({ field }) => (
-              <Input {...field} type="number" placeholder="100" required />
+              <Input
+                {...field}
+                {...register("amount")}
+                type="number"
+                placeholder="100"
+                required
+              />
             )}
           />
         </Box>
@@ -95,7 +107,9 @@ const FundingFormView = ({
         <Button
           variant="contained"
           type="submit"
-          disabled={processing || disabled || succeeded}
+          disabled={
+            processing || disabled || succeeded || Number(watch("amount")) <= 0
+          }
         >
           {processing ? "Processing" : "Fund the Project"}
         </Button>
