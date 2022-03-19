@@ -24,6 +24,7 @@ const FundingFormView = ({
   processing,
   register,
   watch,
+  formState: { errors },
 }: FundingFormViewProps) => {
   const cardStyle = {
     style: {
@@ -52,6 +53,8 @@ const FundingFormView = ({
         flexDirection: "column",
         alignItems: "center",
         gap: "20px",
+        maxWidth: "600px",
+        margin: "0 auto",
       }}
     >
       {formSubmitted && !error && <CircularProgress />}
@@ -63,7 +66,7 @@ const FundingFormView = ({
       >
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <InputLabel htmlFor="contributor">Your Name</InputLabel>
-          <FormHelperText id="component-helper-text">
+          <FormHelperText id="name-field-helper-text">
             You can also choose to remain anonymous!
           </FormHelperText>
           <Controller
@@ -83,6 +86,9 @@ const FundingFormView = ({
           <InputLabel htmlFor="amount">
             Your Funding Amount ($) <span style={{ color: "red" }}>*</span>
           </InputLabel>
+          <FormHelperText id="amount-field-helper-text">
+            Please enter an amount greater than or equal to 1
+          </FormHelperText>
           <Controller
             name="amount"
             control={control}
@@ -95,25 +101,51 @@ const FundingFormView = ({
                 required
               />
             )}
+            rules={{ min: 1 }}
           />
+          {errors.amount && (
+            <Typography variant="subtitle2" sx={{ color: "red" }}>
+              Please enter an amount greater than or equal to 1
+            </Typography>
+          )}
         </Box>
-        <Box mt="10px" mb="10px">
-          <CardElement
-            id="card-element"
-            options={cardStyle}
-            onChange={handleChange}
-          />
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+          }}
+        >
+          <InputLabel htmlFor="card-element">
+            Credit Card Info <span style={{ color: "red" }}>*</span>
+          </InputLabel>
+          <FormHelperText id="card-helper-text">
+            This is a simulated transaction to test Stripe integration. Please
+            use card number 4242 4242 4242 4242, any future date for expiration,
+            and any 3 digits for CVC,.
+          </FormHelperText>
+          <Box mt="10px" mb="10px" sx={{ borderBottom: "grey solid 1px" }}>
+            <CardElement
+              id="card-element"
+              options={cardStyle}
+              onChange={handleChange}
+            />
+          </Box>
+          {error && (
+            <Typography variant="subtitle2" sx={{ color: "red" }}>
+              {error}
+            </Typography>
+          )}
         </Box>
         <Button
           variant="contained"
           type="submit"
-          disabled={
-            processing || disabled || succeeded || Number(watch("amount")) <= 0
-          }
+          disabled={processing || disabled || succeeded}
         >
           {processing ? "Processing" : "Fund the Project"}
         </Button>
-        {error && <Typography>{error}</Typography>}
+
         {succeeded && (
           <Typography>Your funding went through! Please wait</Typography>
         )}

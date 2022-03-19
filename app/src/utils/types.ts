@@ -4,6 +4,7 @@ import {
   UseFormHandleSubmit,
   UseFormRegister,
   UseFormWatch,
+  FormState,
 } from "react-hook-form";
 
 export interface Project {
@@ -102,6 +103,7 @@ export interface FundingFormViewProps {
   handleSubmit: UseFormHandleSubmit<FundingFormInput>;
   register: UseFormRegister<FundingFormInput>;
   watch: UseFormWatch<FundingFormInput>;
+  formState: FormState<FundingFormInput>;
 }
 
 export interface ProjectDetailsViewProps {

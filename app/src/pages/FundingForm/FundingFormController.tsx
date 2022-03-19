@@ -11,7 +11,7 @@ import FundingFormView from "./FundingFormView";
 
 const FundingFormController = () => {
   const { projectId } = useParams<string>();
-  const { watch, register, control, handleSubmit } =
+  const { watch, register, control, handleSubmit, formState } =
     useForm<FundingFormInput>();
   const [formSubmitted, setFormSubmitted] = React.useState<boolean>(false);
   const navigate = useNavigate();
@@ -107,6 +107,7 @@ const FundingFormController = () => {
       handleSubmit={handleSubmit}
       register={register}
       watch={watch}
+      formState={formState}
     />
   );
 };
