@@ -6,6 +6,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Routes, Route } from "react-router-dom";
 
+import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import DashboardController from "./pages/Dashboard/DashboardController";
 import FundingFormController from "./pages/FundingForm/FundingFormController";
@@ -35,36 +36,45 @@ const App = () => {
 
   return (
     <ThemeProvider {...{ theme }}>
-      <Nav />
-      <Container>
-        <Elements stripe={promise}>
-          <Routes>
-            <Route path="/" element={<ProjectListController />} />
-            <Route path="/projects" element={<ProjectListController />} />
-            <Route
-              path="/projects/:projectId"
-              element={<ProjectDetailsController />}
-            />
-            <Route
-              path="/projects/:projectId/fund"
-              element={<FundingFormController />}
-            />
-            <Route
-              path="/addProject"
-              element={<Protected component={ProjectFormController} />}
-            />
-            <Route
-              path="/dashboard"
-              element={<Protected component={DashboardController} />}
-            />
-            <Route
-              path="/projects/:projectId/edit"
-              element={<Protected component={ProjectFormController} />}
-            />
-            <Route path="/*" element={<ProjectListController />} />
-          </Routes>
-        </Elements>
-      </Container>
+      <div className="content">
+        <header>
+          <Nav />
+        </header>
+        <main>
+          <Container>
+            <Elements stripe={promise}>
+              <Routes>
+                <Route path="/" element={<ProjectListController />} />
+                <Route path="/projects" element={<ProjectListController />} />
+                <Route
+                  path="/projects/:projectId"
+                  element={<ProjectDetailsController />}
+                />
+                <Route
+                  path="/projects/:projectId/fund"
+                  element={<FundingFormController />}
+                />
+                <Route
+                  path="/addProject"
+                  element={<Protected component={ProjectFormController} />}
+                />
+                <Route
+                  path="/dashboard"
+                  element={<Protected component={DashboardController} />}
+                />
+                <Route
+                  path="/projects/:projectId/edit"
+                  element={<Protected component={ProjectFormController} />}
+                />
+                <Route path="/*" element={<ProjectListController />} />
+              </Routes>
+            </Elements>
+          </Container>
+        </main>
+        <footer className="footer">
+          <Footer />
+        </footer>
+      </div>
     </ThemeProvider>
   );
 };
