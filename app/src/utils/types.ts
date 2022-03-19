@@ -118,3 +118,7 @@ export interface ProjectFormViewProps {
   register: UseFormRegister<ProjectFormInput>;
   control: Control<ProjectFormInput, any>;
 }
+
+export interface ProjectListViewProps {
+  projects: Project[];
+}
