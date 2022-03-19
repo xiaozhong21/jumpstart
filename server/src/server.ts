@@ -3,10 +3,10 @@ var express = require("express");
 
 import mime from "mime-types";
 
-import jwtCheck from "./utils/jwtCheck";
-import paymentRouter from "./paymentRouter";
-import projectRouter from "./projectRouter";
-import creatorRouter from "./creatorRouter";
+import jwtCheck from "./service/jwtCheck";
+import paymentRouter from "./controller/paymentRouter";
+import projectRouter from "./controller/projectRouter";
+import creatorRouter from "./controller/creatorRouter";
 
 const app = express();
 

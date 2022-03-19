@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 var express = require("express");
 
-import * as db from "./model/db";
-import { ProjectFormInput } from "./utils/types";
+import * as creator from "../model/creator.model";
+import { ProjectFormInput } from "../utils/types";
 
 const creatorRouter = express.Router();
 creatorRouter.use(express.json());
 
 creatorRouter.post("/", async (req: Request, res: Response) => {
-  const user = await db.addOrUpdateUser(req.body.user);
+  const user = await creator.addOrUpdateUser(req.body.user);
   res.status(201).json(user);
 });
 
@@ -19,7 +19,7 @@ creatorRouter.get(
     res: { json: (arg0: any[]) => void },
   ) => {
     try {
-      const creatorProjects = await db.getCreatorProjects(req.user.sub);
+      const creatorProjects = await creator.getCreatorProjects(req.user.sub);
       res.json(creatorProjects);
     } catch (err: any) {
       console.error(err);
@@ -39,8 +39,7 @@ creatorRouter.post(
       };
     },
   ) => {
-    console.log(req.user);
-    const project = await db.addCreatorProject(req.user.sub, req.body);
+    const project = await creator.addCreatorProject(req.user.sub, req.body);
     res.status(201).json(project);
   },
 );
@@ -48,7 +47,7 @@ creatorRouter.post(
 creatorRouter.post(
   "/projects/:projectId",
   async (req: Request, res: Response) => {
-    const updatedProject = await db.updateCreatorProject(
+    const updatedProject = await creator.updateCreatorProject(
       req.params.projectId,
       req.body,
     );
@@ -60,7 +59,7 @@ creatorRouter.delete(
   "/projects/:projectId",
   async (req: Request, res: Response) => {
     try {
-      await db.deleteCreatorProject(req.params.projectId);
+      await creator.deleteCreatorProject(req.params.projectId);
       res.status(204).end();
     } catch (err: any) {
       console.error(err);
