@@ -41,7 +41,7 @@ const ProjectFormController = () => {
     setValue("description", "");
     setValue("label", "");
     setValue("imageUrl", "");
-    setValue("fundingGoal", 1000);
+    setValue("fundingGoal", 0);
   };
 
   const loadProject = React.useCallback(() => {
@@ -63,6 +63,10 @@ const ProjectFormController = () => {
   }, [projectId, autopopulate, clearForm]);
 
   const onSubmit: SubmitHandler<ProjectFormInput> = async (data) => {
+    if (data.imageUrl === "") {
+      data.imageUrl =
+        "https://github.com/xiaozhong21/jumpstart/blob/main/app/src/assets/logo.png?raw=true";
+    }
     if (isAddMode) {
       await apiClient.addCreatorProject(data);
     } else {
