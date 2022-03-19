@@ -3,15 +3,15 @@ var express = require("express");
 
 import mime from "mime-types";
 
-import jwtCheck from "./jwtCheck";
-import fundingRouter from "./fundingRouter";
+import jwtCheck from "./utils/jwtCheck";
+import paymentRouter from "./paymentRouter";
 import projectRouter from "./projectRouter";
 import creatorRouter from "./creatorRouter";
 
 const app = express();
 
 app.use("/api/projects", projectRouter);
-app.use("/api/funding", fundingRouter);
+app.use("/api/payment", paymentRouter);
 app.use("/api/creators", jwtCheck, creatorRouter);
 
 // Heartbeat URL endpoint
@@ -37,5 +37,5 @@ if (process.env?.SERVE_REACT?.toLowerCase() === "true") {
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
-  console.info(`Example server listening at http://localhost:${port}`);
+  console.info(`Jumpstart server listening at http://localhost:${port}`);
 });

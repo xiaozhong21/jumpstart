@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 var express = require("express");
 
-import * as db from "./db";
-import { ProjectFormInput } from "./types";
+import * as db from "./model/db";
+import { ProjectFormInput } from "./utils/types";
 
 const creatorRouter = express.Router();
 creatorRouter.use(express.json());
@@ -40,7 +40,7 @@ creatorRouter.post(
     },
   ) => {
     console.log(req.user);
-    const project = await db.addProject(req.user.sub, req.body);
+    const project = await db.addCreatorProject(req.user.sub, req.body);
     res.status(201).json(project);
   },
 );
@@ -48,11 +48,23 @@ creatorRouter.post(
 creatorRouter.post(
   "/projects/:projectId",
   async (req: Request, res: Response) => {
-    const updatedProject = await db.updateProject(
+    const updatedProject = await db.updateCreatorProject(
       req.params.projectId,
       req.body,
     );
     res.status(201).json(updatedProject);
+  },
+);
+
+creatorRouter.delete(
+  "/projects/:projectId",
+  async (req: Request, res: Response) => {
+    try {
+      await db.deleteCreatorProject(req.params.projectId);
+      res.status(204).end();
+    } catch (err: any) {
+      console.error(err);
+    }
   },
 );
 

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 var express = require("express");
 
-import * as db from "./db";
+import * as db from "./model/db";
 
 const projectRouter = express.Router();
 projectRouter.use(express.json());
@@ -39,14 +39,5 @@ projectRouter.post(
     res.status(201).json(projectFunding);
   },
 );
-
-projectRouter.delete("/:projectId", async (req: Request, res: Response) => {
-  try {
-    await db.deleteProject(req.params.projectId);
-    res.status(204).end();
-  } catch (err: any) {
-    console.error(err);
-  }
-});
 
 export default projectRouter;

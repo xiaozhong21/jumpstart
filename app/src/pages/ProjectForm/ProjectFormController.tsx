@@ -59,9 +59,9 @@ const ProjectFormController = () => {
 
   const onSubmit: SubmitHandler<ProjectFormInput> = async (data) => {
     if (isAddMode) {
-      await apiClient.addProject(data);
+      await apiClient.addCreatorProject(data);
     } else {
-      await apiClient.updateProject(projectId, data);
+      await apiClient.updateCreatorProject(projectId, data);
     }
     navigate("/dashboard");
   };

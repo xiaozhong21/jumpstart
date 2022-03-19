@@ -7,15 +7,8 @@ import {
   IClient,
 } from "pg-promise/typescript/pg-subset";
 
-import { ProjectFormInput, FundingDetails } from "./types";
+import { Creator, ProjectFormInput, FundingDetails } from "../utils/types";
 
-export interface Creator {
-  given_name: string;
-  family_name: string;
-  picture: string;
-  email: string;
-  sub: string;
-}
 const pgp = pgPromise();
 const db = initDb();
 
@@ -52,7 +45,7 @@ export const addOrUpdateUser = (user: Creator) =>
     user,
   );
 
-export const addProject = (sub: string, project: ProjectFormInput) =>
+export const addCreatorProject = (sub: string, project: ProjectFormInput) =>
   db.one(
     `INSERT INTO projects(creator_id, title, description, label, image_url, funding_goal)
     VALUES((SELECT creator_id FROM creators WHERE sub=$<sub>), $<title>, $<description>, $<label>, $<imageUrl>, $<fundingGoal>)
@@ -75,7 +68,7 @@ export const addProjectFunding = ({
   );
 };
 
-export const updateProject = (projectId: string, project: any) =>
+export const updateCreatorProject = (projectId: string, project: any) =>
   db.one(
     `UPDATE projects SET title=$<title>, description=$<description>, label=$<label>, image_url=$<imageUrl>, funding_goal=$<fundingGoal>
     WHERE project_id=$<projectId>
@@ -83,7 +76,7 @@ export const updateProject = (projectId: string, project: any) =>
     { projectId, ...project },
   );
 
-export const deleteProject = (projectId: string) =>
+export const deleteCreatorProject = (projectId: string) =>
   db.none("DELETE FROM projects WHERE project_id=$<projectId>", {
     projectId,
   });

@@ -38,7 +38,7 @@ const FundingFormController = () => {
   };
 
   const createPaymentIntent = async (fundingDetails: FundingDetails) => {
-    const paymentIntent = await fetch("/api/funding", {
+    const paymentIntent = await fetch("/api/payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(fundingDetails),

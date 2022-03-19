@@ -29,7 +29,7 @@ const ProjectCard = ({
   const { apiClient } = useProtectedApi();
 
   const handleDelete = async () => {
-    await apiClient.deleteProject(projectId);
+    await apiClient.deleteCreatorProject(projectId);
     loadCreatorProjects && loadCreatorProjects();
   };
 
