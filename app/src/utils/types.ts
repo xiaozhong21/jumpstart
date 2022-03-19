@@ -95,3 +95,10 @@ export interface FundingFormViewProps {
   control: Control<FundingFormInput, any>;
   handleSubmit: UseFormHandleSubmit<FundingFormInput>;
 }
+
+export interface ProjectDetailsViewProps {
+  project: Project | undefined;
+  projectFundings: ProjectFunding[];
+  error: boolean;
+  errorMessage: string;
+}
