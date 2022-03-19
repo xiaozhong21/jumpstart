@@ -163,54 +163,62 @@ const ProjectDetailsView = ({
 
       <Grid container spacing={4} mt={1} sx={{ justifyContent: "center" }}>
         <Grid item xs={12} md={7}>
-          <Box>
-            <Typography variant="body2" component="div">
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <Typography variant="h6" sx={{ color: "#00807b" }}>
+              Project Description
+            </Typography>
+            <Typography variant="body1" sx={{ fontWeight: 400 }}>
               {project.description}
             </Typography>
           </Box>
         </Grid>
+
         <Grid item xs={12} md={4}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "space-between",
-            }}
-          >
-            <List>
-              {projectFundings &&
-                projectFundings
-                  .slice(0, 3)
-                  .map(({ funding_id, contributor, amount, created_at }) => (
-                    <>
-                      <Divider />
-                      <ListItem key={funding_id}>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <LoyaltyTwoToneIcon sx={{ color: "white" }} />
-                          </Avatar>
-                        </ListItemAvatar>
-                        {contributor ? (
-                          <ListItemText
-                            primary={`$${convertNumToThousandths(
-                              amount,
-                            )} from ${contributor}`}
-                            secondary={timestampFormatter(created_at)}
-                          />
-                        ) : (
-                          <ListItemText
-                            primary={`$${convertNumToThousandths(amount)}`}
-                            secondary={timestampFormatter(created_at)}
-                          />
-                        )}
-                      </ListItem>
-                    </>
-                  ))}
-            </List>
-            {projectFundings.length !== 0 ? (
-              <FundingHistoryModal projectFundings={projectFundings} />
-            ) : null}
-          </Box>
+          {projectFundings.length !== 0 ? (
+            <Box>
+              <Typography variant="h6" sx={{ color: "#00807b" }}>
+                Funding History
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "space-between",
+                }}
+              >
+                <List>
+                  {projectFundings
+                    .slice(0, 3)
+                    .map(({ funding_id, contributor, amount, created_at }) => (
+                      <>
+                        <Divider />
+                        <ListItem key={funding_id}>
+                          <ListItemAvatar>
+                            <Avatar>
+                              <LoyaltyTwoToneIcon sx={{ color: "white" }} />
+                            </Avatar>
+                          </ListItemAvatar>
+                          {contributor ? (
+                            <ListItemText
+                              primary={`$${convertNumToThousandths(
+                                amount,
+                              )} from ${contributor}`}
+                              secondary={timestampFormatter(created_at)}
+                            />
+                          ) : (
+                            <ListItemText
+                              primary={`$${convertNumToThousandths(amount)}`}
+                              secondary={timestampFormatter(created_at)}
+                            />
+                          )}
+                        </ListItem>
+                      </>
+                    ))}
+                </List>
+                <FundingHistoryModal projectFundings={projectFundings} />
+              </Box>
+            </Box>
+          ) : null}
         </Grid>
       </Grid>
     </>

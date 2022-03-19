@@ -1,3 +1,4 @@
+import LabelIcon from "@mui/icons-material/Label";
 import {
   Card,
   CardContent,
@@ -11,6 +12,7 @@ import {
 import { Link } from "react-router-dom";
 
 import useProtectedApi from "../services/apiClients/useProtectedApi";
+import { convertNumToThousandths } from "../utils/helpers";
 import { ProjectCardProps } from "../utils/types";
 
 import ProgressBar from "./ProgressBar";
@@ -50,36 +52,81 @@ const ProjectCard = ({
                 flexDirection: "column",
                 alignItems: "center",
                 gap: "20px",
+                mt: "10px",
               }}
             >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  gap: 2,
+                  width: "100%",
+                }}
+              >
+                <LabelIcon sx={{ color: "#00807b" }} />
+                <Typography sx={{ color: "#00807b", fontSize: "small" }}>
+                  {label}
+                </Typography>
+              </Box>
+
               <Typography
                 gutterBottom
-                variant="h5"
+                variant="h6"
                 component="div"
                 sx={{
-                  height: "30px",
+                  height: "50px",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
+                  margin: 0,
+                  textAlign: "center",
                 }}
               >
                 {title}
               </Typography>
+
               <Typography
-                variant="body2"
+                variant="body1"
                 color="text.secondary"
                 sx={{
-                  height: "65px",
+                  height: "60px",
                   width: "90%",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
+                  margin: 0,
+                  textAlign: "justify",
+                  fontWeight: "400",
                 }}
               >
                 {description}
               </Typography>
-              <ProgressBar {...{ fundingGoal, totalFundings }} />
-              <Typography variant="body2" component="div">
-                ${totalFundings} raised of ${fundingGoal}
-              </Typography>
+
+              <ProgressBar
+                fundingGoal={fundingGoal}
+                totalFundings={totalFundings}
+              />
+
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  component="div"
+                  sx={{ fontSize: "x-large", fontWeight: "900" }}
+                >
+                  ${convertNumToThousandths(totalFundings)}
+                </Typography>
+                <Typography>
+                  <span style={{ fontSize: "small", color: "grey" }}>
+                    raised of ${convertNumToThousandths(fundingGoal)} goal
+                  </span>
+                </Typography>
+              </Box>
             </CardContent>
           </CardActionArea>
         </Link>

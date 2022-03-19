@@ -139,7 +139,7 @@ const Nav = () => {
                   onClick={() => handleCloseNavMenu(page.link)}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
-                  {page.label}
+                  <Typography variant="body2">{page.label}</Typography>
                 </Button>
               ))}
             </Box>
