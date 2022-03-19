@@ -1,4 +1,9 @@
-import { Control, SubmitHandler, UseFormHandleSubmit } from "react-hook-form";
+import {
+  Control,
+  SubmitHandler,
+  UseFormHandleSubmit,
+  UseFormRegister,
+} from "react-hook-form";
 
 export interface Project {
   project_id: number;
@@ -101,4 +106,15 @@ export interface ProjectDetailsViewProps {
   projectFundings: ProjectFunding[];
   error: boolean;
   errorMessage: string;
+}
+
+export interface ProjectFormViewProps {
+  isAddMode: boolean;
+  error: boolean;
+  errorMessage: string;
+  project: Project | undefined;
+  handleSubmit: UseFormHandleSubmit<ProjectFormInput>;
+  onSubmit: SubmitHandler<ProjectFormInput>;
+  register: UseFormRegister<ProjectFormInput>;
+  control: Control<ProjectFormInput, any>;
 }
