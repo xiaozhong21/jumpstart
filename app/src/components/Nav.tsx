@@ -62,7 +62,7 @@ const Nav = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, height: 100 }}>
+    <Box sx={{ flexGrow: 1, height: 100 }} aria-label="navigation bar">
       <AppBar position="sticky">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -83,7 +83,7 @@ const Nav = () => {
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
-                aria-label="account of current user"
+                aria-label="icon button for menu, click to get menu items"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}

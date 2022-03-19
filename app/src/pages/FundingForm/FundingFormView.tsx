@@ -44,6 +44,7 @@ const FundingFormView = ({
 
   return (
     <Box
+      aria-label="Funding form to contribute to initial funding to your selected project via credit card"
       sx={{
         display: "flex",
         flexDirection: "column",

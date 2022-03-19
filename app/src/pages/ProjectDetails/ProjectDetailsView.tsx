@@ -144,6 +144,7 @@ const ProjectDetailsView = ({
             >
               <Link to={`/projects/${project.project_id}/fund`}>
                 <Button
+                  aria-label="click the button to fund this project"
                   variant="contained"
                   sx={{
                     color: "black",

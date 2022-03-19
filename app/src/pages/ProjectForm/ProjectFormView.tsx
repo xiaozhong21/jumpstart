@@ -7,6 +7,7 @@ import {
   FormHelperText,
   Box,
   Button,
+  TextareaAutosize,
 } from "@mui/material";
 import { Controller } from "react-hook-form";
 
@@ -52,7 +53,7 @@ const ProjectFormView = ({
               <Input
                 {...field}
                 {...register("title")}
-                aria-describedby="title-helper-text"
+                aria-describedby="Name your project to impress your funders"
                 required
               />
             )}
@@ -69,10 +70,11 @@ const ProjectFormView = ({
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <Input
+              <TextareaAutosize
+                minRows={3}
                 {...field}
                 {...register("description")}
-                aria-describedby="description-helper-text"
+                aria-describedby="Briefly state your mission statement"
               />
             )}
           />
@@ -96,7 +98,7 @@ const ProjectFormView = ({
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <InputLabel htmlFor="imageUrl">Project Image</InputLabel>
           <FormHelperText id="description-helper-text">
-            Upload an image that represents your project
+            Include a link to an image represents your project
           </FormHelperText>
           <Controller
             name="imageUrl"
@@ -106,7 +108,7 @@ const ProjectFormView = ({
               <Input
                 {...field}
                 {...register("imageUrl")}
-                aria-describedby="imageUrl-helper-text"
+                aria-describedby="Include a link to an image represents your project"
               />
             )}
           />
@@ -122,7 +124,7 @@ const ProjectFormView = ({
             render={({ field }) => (
               <Input
                 {...field}
-                {...register("fundingGoal")}
+                {...register("fundingGoal", { min: 0 })}
                 type="number"
                 placeholder="100"
                 required

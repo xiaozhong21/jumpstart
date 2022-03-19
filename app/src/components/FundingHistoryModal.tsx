@@ -36,7 +36,12 @@ const FundingHistoryModal = ({ projectFundings }: FundingHistoryModalProps) => {
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <Button onClick={handleOpen}>See all fundings</Button>
+      <Button
+        aria-label="click to see all past fundings for this project"
+        onClick={handleOpen}
+      >
+        See all fundings
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

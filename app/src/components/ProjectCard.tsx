@@ -37,7 +37,7 @@ const ProjectCard = ({
     <Box>
       <Card sx={{ maxWidth: 345 }}>
         <Link to={`/projects/${projectId}`}>
-          <CardActionArea>
+          <CardActionArea aria-label="clickable project card showing project image, description, and funding status">
             <CardMedia
               component="img"
               height="140"
@@ -69,6 +69,7 @@ const ProjectCard = ({
                 color="text.secondary"
                 sx={{
                   height: "65px",
+                  width: "90%",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                 }}
@@ -85,9 +86,11 @@ const ProjectCard = ({
         {isAuthenticated ? (
           <CardActions sx={{ display: "flex", justifyContent: "space-evenly" }}>
             <Link to={`/projects/${projectId}/edit`}>
-              <Button>Edit</Button>
+              <Button aria-label="edit current project">Edit</Button>
             </Link>
-            <Button onClick={handleDelete}>Delete</Button>
+            <Button onClick={handleDelete} aria-label="delete current project">
+              Delete
+            </Button>
           </CardActions>
         ) : null}
       </Card>
