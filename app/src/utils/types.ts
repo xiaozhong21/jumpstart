@@ -1,3 +1,5 @@
+import { Control, SubmitHandler, UseFormHandleSubmit } from "react-hook-form";
+
 export interface Project {
   project_id: number;
   title: string;
@@ -80,4 +82,16 @@ export interface DashboardViewProps {
   creatorProjects: Project[];
   isAuthenticated: boolean;
   loadCreatorProjects: () => void;
+}
+
+export interface FundingFormViewProps {
+  handleFormSubmit: SubmitHandler<FundingFormInput>;
+  formSubmitted: boolean;
+  error: string | null;
+  handleChange: (event: any) => Promise<void>;
+  succeeded: boolean;
+  disabled: boolean;
+  processing: boolean | undefined;
+  control: Control<FundingFormInput, any>;
+  handleSubmit: UseFormHandleSubmit<FundingFormInput>;
 }

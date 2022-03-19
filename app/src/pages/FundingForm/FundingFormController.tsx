@@ -1,20 +1,13 @@
 import * as React from "react";
 
-import {
-  Typography,
-  InputLabel,
-  Input,
-  FormHelperText,
-  Box,
-  Button,
-  CircularProgress,
-} from "@mui/material";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
 import * as apiClient from "../../services/apiClients/usePublicApi";
 import { FundingFormInput, FundingDetails } from "../../utils/types";
+
+import FundingFormView from "./FundingFormView";
 
 const FundingFormController = () => {
   const { projectId } = useParams<string>();
@@ -28,25 +21,6 @@ const FundingFormController = () => {
   const [disabled, setDisabled] = React.useState<boolean>(true);
   const stripe = useStripe();
   const elements = useElements();
-
-  const cardStyle = {
-    style: {
-      base: {
-        color: "#32325d",
-        fontFamily: "Arial, sans-serif",
-        fontSmoothing: "antialiased",
-        fontSize: "16px",
-        "::placeholder": {
-          color: "#32325d",
-        },
-      },
-      invalid: {
-        fontFamily: "Arial, sans-serif",
-        color: "#fa755a",
-        iconColor: "#fa755a",
-      },
-    },
-  };
 
   const handleFormSubmit: SubmitHandler<FundingFormInput> = async (data) => {
     let fundingDetails = {
@@ -120,67 +94,17 @@ const FundingFormController = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "20px",
-      }}
-    >
-      {formSubmitted && !error && <CircularProgress />}
-      <Typography variant="h5">Funding Form for Project {projectId}</Typography>
-      <Box
-        component="form"
-        onSubmit={handleSubmit(handleFormSubmit)}
-        sx={{ display: "flex", flexDirection: "column", gap: "30px" }}
-      >
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-          <InputLabel htmlFor="contributor">Your Name</InputLabel>
-          <FormHelperText id="component-helper-text">
-            You can also choose to remain anonymous!
-          </FormHelperText>
-          <Controller
-            name="contributor"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <Input {...field} aria-describedby="component-helper-text" />
-            )}
-          />
-        </Box>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-          <InputLabel htmlFor="amount">
-            Your Funding Amount ($) <span style={{ color: "red" }}>*</span>
-          </InputLabel>
-          <Controller
-            name="amount"
-            control={control}
-            render={({ field }) => (
-              <Input {...field} type="number" placeholder="100" required />
-            )}
-          />
-        </Box>
-        <Box mt="10px" mb="10px">
-          <CardElement
-            id="card-element"
-            options={cardStyle}
-            onChange={handleChange}
-          />
-        </Box>
-        <Button
-          variant="contained"
-          type="submit"
-          disabled={processing || disabled || succeeded}
-        >
-          {processing ? "Processing" : "Fund the Project"}
-        </Button>
-        {error && <Typography>{error}</Typography>}
-        {succeeded && (
-          <Typography>Your funding went through! Please wait</Typography>
-        )}
-      </Box>
-    </Box>
+    <FundingFormView
+      handleFormSubmit={handleFormSubmit}
+      formSubmitted={formSubmitted}
+      error={error}
+      handleChange={handleChange}
+      succeeded={succeeded}
+      disabled={disabled}
+      processing={processing}
+      control={control}
+      handleSubmit={handleSubmit}
+    />
   );
 };
 
