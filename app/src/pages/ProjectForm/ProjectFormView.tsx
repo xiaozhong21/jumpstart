@@ -22,6 +22,7 @@ const ProjectFormView = ({
   onSubmit,
   register,
   control,
+  formState: { errors },
 }: ProjectFormViewProps) => {
   const formContent = (
     <Box
@@ -30,6 +31,8 @@ const ProjectFormView = ({
         flexDirection: "column",
         alignItems: "center",
         gap: "20px",
+        maxWidth: "600px",
+        margin: "0 auto",
       }}
     >
       <Typography variant="h5">JumpStart Your Project</Typography>
@@ -63,7 +66,8 @@ const ProjectFormView = ({
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <InputLabel htmlFor="description">Project Description</InputLabel>
           <FormHelperText id="description-helper-text">
-            Briefly state your mission statement!
+            Briefly state your mission statement! This is your chance to
+            convince potential investors
           </FormHelperText>
           <Controller
             name="description"
@@ -98,7 +102,8 @@ const ProjectFormView = ({
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <InputLabel htmlFor="imageUrl">Project Image</InputLabel>
           <FormHelperText id="description-helper-text">
-            Include a link to an image represents your project
+            Consider including a link to an image that can best represent your
+            project
           </FormHelperText>
           <Controller
             name="imageUrl"
@@ -124,13 +129,19 @@ const ProjectFormView = ({
             render={({ field }) => (
               <Input
                 {...field}
-                {...register("fundingGoal", { min: 0 })}
+                {...register("fundingGoal")}
                 type="number"
                 placeholder="100"
                 required
               />
             )}
+            rules={{ min: 0 }}
           />
+          {errors.fundingGoal && (
+            <Typography variant="subtitle2" sx={{ color: "red" }}>
+              Please enter a positive amount
+            </Typography>
+          )}
         </Box>
 
         <Button variant="contained" type="submit">

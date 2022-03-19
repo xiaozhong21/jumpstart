@@ -122,6 +122,7 @@ export interface ProjectFormViewProps {
   onSubmit: SubmitHandler<ProjectFormInput>;
   register: UseFormRegister<ProjectFormInput>;
   control: Control<ProjectFormInput, any>;
+  formState: FormState<ProjectFormInput>;
 }
 
 export interface ProjectListViewProps {

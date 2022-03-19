@@ -11,7 +11,7 @@ import ProjectFormView from "./ProjectFormView";
 const ProjectFormController = () => {
   const { loading, apiClient } = useProtectedApi();
 
-  const { register, control, handleSubmit, setValue } =
+  const { register, control, handleSubmit, setValue, formState } =
     useForm<ProjectFormInput>();
   const navigate = useNavigate();
   const { projectId } = useParams();
@@ -80,6 +80,7 @@ const ProjectFormController = () => {
       onSubmit={onSubmit}
       register={register}
       control={control}
+      formState={formState}
     />
   );
 };
