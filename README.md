@@ -76,6 +76,7 @@ Third-party APIs and libraries:
 
 ## Data Schema
 
+<div align="center"> <img width="900" alt="JumpStart db schema" src="app/src/assets/data-schema.png" href="https://investory-app.herokuapp.com/"> </div>
 
 ## User Flow
 
