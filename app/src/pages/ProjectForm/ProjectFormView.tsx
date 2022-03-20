@@ -35,11 +35,18 @@ const ProjectFormView = ({
         margin: "0 auto",
       }}
     >
-      <Typography variant="h5">JumpStart Your Project</Typography>
+      <Typography variant="h5" color="#00807b">
+        JumpStart Your Project
+      </Typography>
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
-        sx={{ display: "flex", flexDirection: "column", gap: "30px" }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          mt: "20px",
+        }}
       >
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <InputLabel htmlFor="title">

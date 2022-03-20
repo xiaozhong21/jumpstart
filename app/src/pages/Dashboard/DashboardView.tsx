@@ -11,7 +11,18 @@ const DashboardView = ({
   !creatorProjects.length ? (
     <Typography>You have not added any projects yet</Typography>
   ) : (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        mt: "7px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "20px",
+      }}
+    >
+      <Typography variant="h5" color="#00807b" textAlign="center" mb="20px">
+        Manage your projects here
+      </Typography>
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
