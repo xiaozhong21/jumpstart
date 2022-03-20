@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 var express = require("express");
 
 import * as project from "../model/project.model";
+import * as funding from "../model/funding.model";
 
 const projectRouter = express.Router();
 projectRouter.use(express.json());
@@ -24,7 +25,7 @@ projectRouter.get(
   "/:projectId/fundings",
   async (req: Request, res: Response) => {
     try {
-      const projectFundings = await project.getProjectFundings(
+      const projectFundings = await funding.getProjectFundings(
         req.params.projectId,
       );
       res.json(projectFundings);
@@ -37,7 +38,7 @@ projectRouter.get(
 projectRouter.post(
   "/:projectId/fundings",
   async (req: Request, res: Response) => {
-    const projectFunding = await project.addProjectFunding(req.body);
+    const projectFunding = await funding.addProjectFunding(req.body);
     res.status(201).json(projectFunding);
   },
 );

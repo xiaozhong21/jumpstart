@@ -5,10 +5,10 @@ var express = require("express");
 dotenv.config({ path: "../.env" });
 const stripe = require("stripe")(process.env.STRIPE_API_SECRET_KEY);
 
-const paymentRouter = express.Router();
-paymentRouter.use(express.json());
+const fundingRouter = express.Router();
+fundingRouter.use(express.json());
 
-paymentRouter.post("/", async (req: Request, res: Response) => {
+fundingRouter.post("/", async (req: Request, res: Response) => {
   const fundingDetails = req.body;
 
   const paymentIntent = await stripe.paymentIntents.create({
@@ -21,4 +21,4 @@ paymentRouter.post("/", async (req: Request, res: Response) => {
   });
 });
 
-export default paymentRouter;
+export default fundingRouter;
