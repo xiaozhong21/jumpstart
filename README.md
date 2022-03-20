@@ -302,7 +302,11 @@ You'll need to install Node v14 or above. [`nvm`][nvm] is highly recommended.
          - This [graphic](https://images.ctfassets.net/23aumh6u8s0i/1DyyZTcfbJHw577T6K2KZk/a8cabcec991c9ed33910a23836e53b76/auth0-application-settings) may be helpful to locating the values
          - [Auth0's guide](https://auth0.com/blog/complete-guide-to-react-user-authentication/#Connect-React-with-Auth0)
 
+
    2. Stripe API Key setup by signing up for an account on their [site](https://stripe.com/docs/keys)
+
+   - The secret key will be put in `.env` as `STRIPE_API_SECRET_KEY`
+   - The publshable key will be put in `./app/.env` as `REACT_APP_STRIPE_KEY`
 
 ### Start the Development Environment
 
