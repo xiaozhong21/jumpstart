@@ -190,9 +190,9 @@ const ProjectDetailsView = ({
                   {projectFundings
                     .slice(0, 3)
                     .map(({ funding_id, contributor, amount, created_at }) => (
-                      <>
+                      <Box key={funding_id}>
                         <Divider />
-                        <ListItem key={funding_id}>
+                        <ListItem>
                           <ListItemAvatar>
                             <Avatar>
                               <LoyaltyTwoToneIcon sx={{ color: "white" }} />
@@ -212,7 +212,7 @@ const ProjectDetailsView = ({
                             />
                           )}
                         </ListItem>
-                      </>
+                      </Box>
                     ))}
                 </List>
                 <FundingHistoryModal projectFundings={projectFundings} />

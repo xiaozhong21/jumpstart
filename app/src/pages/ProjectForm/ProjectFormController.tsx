@@ -60,7 +60,7 @@ const ProjectFormController = () => {
     } else {
       clearForm();
     }
-  }, [projectId, autopopulate, clearForm]);
+  }, [apiClient, projectId, autopopulate, clearForm]);
 
   const onSubmit: SubmitHandler<ProjectFormInput> = async (data) => {
     if (data.imageUrl === "") {
