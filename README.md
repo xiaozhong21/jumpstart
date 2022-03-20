@@ -123,6 +123,8 @@ Are you interested in obtaining initial funding for your amazing business idea? 
 ```
 ### Data Schema
 
+A snapshot of seed data can be found in `./pg/seed.psql`, which includes data tables and their relationships.
+
 <div align="center"> <img width="900" alt="JumpStart db schema" src="app/src/assets/data-schema.png" href="https://investory-app.herokuapp.com/"> </div>
 
 ### Expected payload and response
