@@ -13,7 +13,8 @@ const DashboardController = () => {
   const [creatorProjects, setCreatorProjects] = React.useState<Project[]>([]);
 
   const loadCreatorProjects = React.useCallback(
-    async () => setCreatorProjects(await apiClient.getCreatorProjects()),
+    async () =>
+      setCreatorProjects(apiClient && (await apiClient.getCreatorProjects())),
     [apiClient],
   );
 

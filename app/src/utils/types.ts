@@ -74,7 +74,19 @@ export interface Creator {
 export interface UseApiStates {
   loading: boolean;
   error: any;
-  apiClient: any;
+  apiClient:
+    | undefined
+    | {
+        addOrUpdateUser: (user: any) => Promise<any>;
+        getCreatorProjects: () => Promise<any>;
+        getProject: (projectId: string) => Promise<any>;
+        addCreatorProject: (project: ProjectFormInput) => Promise<any>;
+        updateCreatorProject: (
+          projectId: string,
+          project: ProjectFormInput,
+        ) => Promise<any>;
+        deleteCreatorProject: (projectId: number) => Promise<any>;
+      };
 }
 
 export interface ProtectedRouteProps {

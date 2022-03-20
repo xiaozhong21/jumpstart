@@ -68,9 +68,9 @@ const ProjectFormController = () => {
         "https://github.com/xiaozhong21/jumpstart/blob/main/app/src/assets/logo.png?raw=true";
     }
     if (isAddMode) {
-      await apiClient.addCreatorProject(data);
+      apiClient && (await apiClient.addCreatorProject(data));
     } else {
-      await apiClient.updateCreatorProject(projectId, data);
+      apiClient && (await apiClient.updateCreatorProject(projectId, data));
     }
     navigate("/dashboard");
   };
