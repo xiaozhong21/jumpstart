@@ -171,6 +171,8 @@ This project uses multiple reusable components that can be found in the `./app/s
 
 ![](https://github.com/xiaozhong21/jumpstart/blob/main/app/src/assets/responsive-site.gif?raw=true)
 
+### Material-UI components
+This project uses various MUI components. A non-exhaustive list: `Box`, `Button`, `Typography`, `Modal`, `List`, `ListItem`, `Avatar`, `AppBar`, `Container`, `Menu`, `LinearProgress`, `Input`, `Card`, etc.
 
 ## Features Demo
 **General users** can:
