@@ -55,6 +55,7 @@ Are you interested in obtaining initial funding for your amazing business idea? 
 │   │   ├── assets
 │   │   │   ├── logo.png
 │   │   │   └── ...
+│   │   │
 │   │   ├── components
 │   │   │   ├── Footer.tsx
 │   │   │   ├── FundingHistoryModal.tsx
@@ -85,9 +86,7 @@ Are you interested in obtaining initial funding for your amazing business idea? 
 │   │   │   │   ├── useProtectedApi.ts
 │   │   │   │   └── usePublicApi.ts
 │   │   │   └── auth
-│   │   │
 │   │   ├── utils
-│   │   │
 │   │   ├── App.tsx
 │   │   ├── index.tsx
 │   │   └── ...
@@ -105,6 +104,7 @@ Are you interested in obtaining initial funding for your amazing business idea? 
 │   │   │   └── projectRouter.ts
 │   │   ├── model
 │   │   │   ├── creator.model.ts
+│   │   │   ├── funding.model.ts
 │   │   │   └── project.model.ts
 │   │   ├── services
 │   │   │   ├── dbConnection.ts
