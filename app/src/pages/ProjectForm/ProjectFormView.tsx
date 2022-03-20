@@ -96,8 +96,11 @@ const ProjectFormView = ({
             control={control}
             render={({ field }) => (
               <Select variant="standard" {...field} {...register("label")}>
-                <MenuItem value="art">Art</MenuItem>
-                <MenuItem value="tech">Technology</MenuItem>
+                <MenuItem value="Arts">Arts</MenuItem>
+                <MenuItem value="Food and Craft">Food and Craft</MenuItem>
+                <MenuItem value="Tech and Design">Tech and Design</MenuItem>
+                <MenuItem value="Games">Games</MenuItem>
+                <MenuItem value="Music">Music</MenuItem>
               </Select>
             )}
           />

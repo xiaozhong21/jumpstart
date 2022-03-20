@@ -111,8 +111,8 @@ ALTER TABLE public.projects ALTER COLUMN project_id ADD GENERATED ALWAYS AS IDEN
 --
 
 COPY public.creators (creator_id, given_name, family_name, picture, email, sub) FROM stdin;
+2	JumpStart-Tester	JumpStart	https://lh3.googleusercontent.com/a/AATXAJz-nQT7qOc1F_tk5gEdpEcB9MYEVHPgu87qRD2b=s96-c	jumpstart.tester001@gmail.com	google-oauth2|116181798001617024466
 1	Xiao	Zhong	https://lh3.googleusercontent.com/a-/AOh14GgQFkOdMqvQDMK_d6rh9fz00GeBJJRS2N1Icy2y=s96-c	xiao.zhong89@gmail.com	google-oauth2|103052387273923521039
-2	Xiao	Zhong	https://lh3.googleusercontent.com/a-/AOh14GgMv5Q69Uf33jE0LTonnZ_6DsiVX3qPSjfrECIx=s96-c	xzhong.dev@gmail.com	google-oauth2|114366457166198742070
 \.
 
 
@@ -121,7 +121,18 @@ COPY public.creators (creator_id, given_name, family_name, picture, email, sub) 
 --
 
 COPY public.fundings (funding_id, project_id, contributor, amount, created_at) FROM stdin;
-1	1	Jason M	500	2022-03-16 04:07:09.704446
+5	7	Amy S.	200	2022-03-20 05:32:28.275602
+6	7	Tyler	500	2022-03-20 05:33:03.620638
+7	8	Xiao	500	2022-03-20 05:33:48.026431
+8	8	Jamie	120	2022-03-20 05:34:19.663732
+9	8		300	2022-03-20 05:34:53.434461
+10	6		1000	2022-03-20 05:36:13.224557
+11	6	Simon	5000	2022-03-20 05:36:47.962526
+12	6	Ming	250	2022-03-20 05:37:25.814771
+13	6	Todd	600	2022-03-20 05:37:56.096118
+14	6		450	2022-03-20 05:38:28.117615
+15	9	Srihitha	150	2022-03-20 05:39:32.89139
+16	9		200	2022-03-20 05:41:48.842955
 \.
 
 
@@ -130,9 +141,12 @@ COPY public.fundings (funding_id, project_id, contributor, amount, created_at) F
 --
 
 COPY public.projects (project_id, creator_id, title, description, label, image_url, funding_goal, total_fundings, created_at) FROM stdin;
-1	1	My awesome project	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.	tech	https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2669&q=80	1000	500	2022-03-16 04:07:09.488223
-2	1	The best idea ever	Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit	education	https://images.unsplash.com/photo-1601807576163-587225545555?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1973&q=80	15000	3000	2022-03-16 04:07:09.525069
-3	2	The world needs this product	At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga	art	https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2490&q=80	5000	3500	2022-03-16 04:07:09.540352
+6	1	Emerge Home | Feel VR with your bare hands	This is the first product to let you physically feel the metaverse. The Emerge Wave-1 is a new ultrasound-powered tabletop device that helps you physically feel what you see in VR. It will take virtual gatherings and game nights to another level. With the added sensation of touch, you can engage with unique experiences and familiar connections like never before!	Games	https://ksr-ugc.imgix.net/assets/036/382/005/11fe147c590c2b7c97d2cf9e5c02752a_original.jpg?ixlib=rb-4.0.2&w=680&fit=max&v=1645031470&gif-q=50&q=92&s=b84cbf547e8bec29691beeb9ee1fd3ca	200000	7300	2022-03-20 05:13:43.574417
+4	2	MAKE 100: Miniature Woodland Owl Wreaths	As a freelance mixed media artist, I set up an in-home studio during the extended quarantine and spent my days exploring new art mediums and challenging myself with new techniques. \n\nThe wreaths are made of grapevine and come in two sizes, the smaller ones are between 3 and 4 inches in diameter.  The larger wreaths are between 6 and 7 inches. \n\nEach wreath will come with clay elements, moss and/or lichen, and one needle felted wool owl.	Arts	https://ksr-ugc.imgix.net/assets/036/201/477/fd6e4d935d214b07a2a6b2b665a41d0b_original.jpg?ixlib=rb-4.0.2&w=680&fit=max&v=1643427922&gif-q=50&q=92&s=d6a8c616f0d6b97b73c9e1e9369ec1d8	1000	0	2022-03-20 04:42:56.920422
+5	2	‘When There Are No Words' - Exploring Grief and Hope in Song	An album exploring grief, loss and hope. I am writing an album about the struggles of loss, the pain of grief, and the certainty of hope. Will you join me on this journey? I want this album to be of help to those facing loss. I want it to serve others. As I walk the road of my own grief and hope through song, I hope in some way that I can walk with others on their road.	Music	https://ksr-ugc.imgix.net/assets/036/606/502/f40214ab62bb80f19eea26e5ff62be7e_original.PNG?ixlib=rb-4.0.2&w=680&fit=max&v=1646864626&gif-q=50&lossless=true&s=486d7f45d804359342bad30b2c4013e0	6000	0	2022-03-20 05:01:54.20641
+7	1	Tooley’s BBQ Food Truck	My family has been making BBQ for generations and I want to share that love with my neighbors in San Francisco. Here's a sampling of our menu: Shredded Pork Nachos, Pulled Pork Sandwich, Tooley's BBQ Baked Beans, Southern-style Green Beans, Homemade Coleslaw. If you believe in me invest in me!!	Food and Craft	https://images.unsplash.com/photo-1582169296194-e4d644c48063?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1900&q=80	5000	700	2022-03-20 05:19:39.804646
+9	1	"Imperfect Utopia" photobook	A contemporary photo book about remote islands of Japan by Toru Morimoto and Tina Bagué. We are back to re-launch our photobook publishing project!! This photography book shows the essence of everyday life in some of the 411 remote islands excluding the five main islands through their landscapes, environments, and portraits of people who inhabit in these remote islands.	Arts	https://ksr-ugc.imgix.net/assets/036/264/663/8e12139afc081bad52fbd353e5c42da6_original.jpg?ixlib=rb-4.0.2&w=680&fit=max&v=1643974773&gif-q=50&q=92&s=ff444a1a1604eeb19aaff211639fbc74	12500	350	2022-03-20 05:29:11.870493
+8	1	Lance Signature - Finest Visual Experience With Smart Lenses	Remarkable designs are achieved when function and aesthetics find common grounds and manage to thrive together. We draw our inspiration from nature, art and technology. Everything has the potential to trigger a remarkable idea. This collection expresses power and confidence through bold acetate frames and incredible design detailing to complete the powerful yet elegant designs.	Tech and Design	https://ksr-ugc.imgix.net/assets/036/303/757/5c799b9a78fa086cf1bb77ed670852ae_original.png?ixlib=rb-4.0.2&w=680&fit=max&v=1644348945&gif-q=50&lossless=true&s=536aa3f29d7f5b7ac4c1a674b078157c	10000	920	2022-03-20 05:24:15.792076
 \.
 
 
@@ -140,21 +154,21 @@ COPY public.projects (project_id, creator_id, title, description, label, image_u
 -- Name: creators_creator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.creators_creator_id_seq', 45, true);
+SELECT pg_catalog.setval('public.creators_creator_id_seq', 132, true);
 
 
 --
 -- Name: fundings_funding_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.fundings_funding_id_seq', 1, true);
+SELECT pg_catalog.setval('public.fundings_funding_id_seq', 16, true);
 
 
 --
 -- Name: projects_project_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.projects_project_id_seq', 3, true);
+SELECT pg_catalog.setval('public.projects_project_id_seq', 9, true);
 
 
 --

@@ -202,16 +202,6 @@ const Nav = () => {
                 </Menu>
               ) : null}
             </Box>
-
-            {/* <NavLink to="/projects">
-              <Button color="inherit">All Projects</Button>
-            </NavLink>
-            <NavLink to="/addProject">
-              <Button color="inherit">JumpStart Your Project</Button>
-            </NavLink>
-            <NavLink to="/dashboard">
-              <Button color="inherit">Dashboard</Button>
-            </NavLink> */}
           </Toolbar>
         </Container>
       </AppBar>

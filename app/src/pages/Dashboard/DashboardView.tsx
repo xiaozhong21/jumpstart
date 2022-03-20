@@ -1,4 +1,5 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 import ProjectCard from "../../components/ProjectCard";
 import { Project, DashboardViewProps } from "../../utils/types";
@@ -9,7 +10,19 @@ const DashboardView = ({
   loadCreatorProjects,
 }: DashboardViewProps) =>
   !creatorProjects.length ? (
-    <Typography>You have not added any projects yet</Typography>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "30px",
+      }}
+    >
+      <Typography variant="h6">You have not added any projects yet</Typography>
+      <Link to="/addProject">
+        <Button>Create A Project</Button>
+      </Link>
+    </Box>
   ) : (
     <Box
       sx={{

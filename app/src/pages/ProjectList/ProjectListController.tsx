@@ -8,7 +8,14 @@ const ProjectListController = () => {
   const [projects, setProjects] = React.useState<Project[]>([]);
   const [selectedProjects, setSelectedProjects] = React.useState<Project[]>([]);
   const [value, setValue] = React.useState(0);
-  const labels = ["", "art", "tech", "education"];
+  const labels = [
+    "",
+    "Arts",
+    "Food and Craft",
+    "Tech and Design",
+    "Games",
+    "Music",
+  ];
 
   const loadProjects = async () => setProjects(await apiClient.getProjects());
 

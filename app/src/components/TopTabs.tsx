@@ -14,18 +14,21 @@ const TopTabs = ({ value, handleChange }: TabProps) => {
           variant="scrollable"
           scrollButtons
           allowScrollButtonsMobile
-          centered
         >
           <Tab label="All" {...a11yProps(0)} />
-          <Tab label="Art" {...a11yProps(1)} />
-          <Tab label="Technology" {...a11yProps(2)} />
-          <Tab label="Education" {...a11yProps(3)} />
+          <Tab label="Arts" {...a11yProps(1)} />
+          <Tab label="Food and Craft" {...a11yProps(2)} />
+          <Tab label="Tech and Design" {...a11yProps(3)} />
+          <Tab label="Games" {...a11yProps(4)} />
+          <Tab label="Music" {...a11yProps(5)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}></TabPanel>
       <TabPanel value={value} index={1}></TabPanel>
       <TabPanel value={value} index={2}></TabPanel>
       <TabPanel value={value} index={3}></TabPanel>
+      <TabPanel value={value} index={4}></TabPanel>
+      <TabPanel value={value} index={5}></TabPanel>
     </Box>
   );
 };

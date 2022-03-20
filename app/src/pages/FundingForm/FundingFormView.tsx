@@ -123,7 +123,7 @@ const FundingFormView = ({
           <FormHelperText id="card-helper-text">
             This is a simulated transaction to test Stripe integration. Please
             use card number 4242 4242 4242 4242, any future date for expiration,
-            and any 3 digits for CVC,.
+            and any 3 digits for CVC.
           </FormHelperText>
           <Box mt="10px" mb="10px" sx={{ borderBottom: "grey solid 1px" }}>
             <CardElement
