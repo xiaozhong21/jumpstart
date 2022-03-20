@@ -82,10 +82,6 @@ const FundingHistoryModal = ({ projectFundings }: FundingHistoryModalProps) => {
                 ),
               )}
           </List>
-          {/* {projectFundings}
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography> */}
         </Box>
       </Modal>
     </Box>

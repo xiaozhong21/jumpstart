@@ -29,20 +29,3 @@ const _post = async (
 
   return result;
 };
-
-const _delete = async (url: RequestInfo) =>
-  await _fetch(url, { method: "DELETE" });
-
-const _fetch = async (url: RequestInfo, options: RequestInit | undefined) => {
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      ...(options?.headers ?? {}),
-      // Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
-};

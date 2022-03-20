@@ -7,8 +7,6 @@ import {
   IClient,
 } from "pg-promise/typescript/pg-subset";
 
-import { Creator, ProjectFormInput, FundingDetails } from "../utils/types";
-
 const pgp = pgPromise();
 export const db = initDb();
 

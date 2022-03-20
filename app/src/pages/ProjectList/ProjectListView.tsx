@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 import ProjectCard from "../../components/ProjectCard";
 import TopTabs from "../../components/TopTabs";
