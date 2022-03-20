@@ -127,4 +127,12 @@ export interface ProjectFormViewProps {
 
 export interface ProjectListViewProps {
   projects: Project[];
+  selectedProjects: Project[];
+  value: number;
+  handleChange: (event: React.SyntheticEvent, newValue: number) => void;
+}
+
+export interface TabProps {
+  value: number;
+  handleChange: (event: React.SyntheticEvent, newValue: number) => void;
 }

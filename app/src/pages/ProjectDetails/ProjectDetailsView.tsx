@@ -139,7 +139,7 @@ const ProjectDetailsView = ({
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                mt: "20px",
+                mt: "30px",
               }}
             >
               <Link to={`/projects/${project.project_id}/fund`}>

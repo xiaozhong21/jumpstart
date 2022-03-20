@@ -56,9 +56,9 @@ const FundingHistoryModal = ({ projectFundings }: FundingHistoryModalProps) => {
             {projectFundings &&
               projectFundings.map(
                 ({ funding_id, contributor, amount, created_at }) => (
-                  <>
+                  <Box key={funding_id}>
                     <Divider />
-                    <ListItem key={funding_id}>
+                    <ListItem>
                       <ListItemAvatar>
                         <Avatar>
                           <LoyaltyTwoToneIcon sx={{ color: "white" }} />
@@ -78,7 +78,7 @@ const FundingHistoryModal = ({ projectFundings }: FundingHistoryModalProps) => {
                         />
                       )}
                     </ListItem>
-                  </>
+                  </Box>
                 ),
               )}
           </List>
