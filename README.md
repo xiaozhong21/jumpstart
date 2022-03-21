@@ -113,7 +113,7 @@ Are you interested in obtaining initial funding for your amazing business idea? 
 │   │   └── server.ts
 │   │
 │   ├── package.json
-│   └── tsconfog.json
+│   └── tsconfig.json
 │
 ├── .env
 ├── package.json
