@@ -77,20 +77,20 @@ export interface UseApiStates {
   apiClient:
     | undefined
     | {
-        addOrUpdateUser: (user: any) => Promise<any>;
-        getCreatorProjects: () => Promise<any>;
-        getProject: (projectId: string) => Promise<any>;
-        addCreatorProject: (project: ProjectFormInput) => Promise<any>;
+        addOrUpdateUser: (user: any) => Promise<Creator>;
+        getCreatorProjects: () => Promise<Project[]>;
+        getProject: (projectId: string) => Promise<Project>;
+        addCreatorProject: (project: ProjectFormInput) => Promise<Project>;
         updateCreatorProject: (
           projectId: string,
           project: ProjectFormInput,
-        ) => Promise<any>;
-        deleteCreatorProject: (projectId: number) => Promise<any>;
+        ) => Promise<Project>;
+        deleteCreatorProject: (projectId: number) => Promise<Response>;
       };
 }
 
 export interface ProtectedRouteProps {
-  component: any;
+  component: () => JSX.Element;
 }
 
 export interface FundingHistoryModalProps {

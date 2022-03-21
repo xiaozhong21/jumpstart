@@ -14,7 +14,7 @@ const DashboardController = () => {
 
   const loadCreatorProjects = React.useCallback(
     async () =>
-      setCreatorProjects(apiClient && (await apiClient.getCreatorProjects())),
+      apiClient && setCreatorProjects(await apiClient.getCreatorProjects()),
     [apiClient],
   );
 
