@@ -25,15 +25,15 @@ Are you interested in obtaining initial funding for your amazing business idea? 
 
 - View project list page
 - View project details page where they can
-- Contribute to project initial funding
-- View funding history
+  - Contribute to project initial funding
+  - View funding history
 
 #### Authorized/Logged-in user features (on top of getting all above):
 
 - Log in
 - Post new projects
 - Edit created projects
-- Delete created projected
+- Delete created projects
 
 ## Live Demo
 
