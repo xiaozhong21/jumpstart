@@ -13,7 +13,7 @@ const makeApi = (accessToken: string) => {
     updateCreatorProject: async (
       projectId: string,
       project: ProjectFormInput,
-    ) => _post(`/api/creators/projects/${projectId}`, project),
+    ) => _put(`/api/creators/projects/${projectId}`, project),
     deleteCreatorProject: async (projectId: number) =>
       _delete(`/api/creators/projects/${projectId}`),
   };
@@ -23,6 +23,19 @@ const makeApi = (accessToken: string) => {
   const _post = async (url: string, body: any) => {
     const response = await _fetch(url, {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    let result;
+    try {
+      result = await response.json();
+    } catch {}
+    return result;
+  };
+
+  const _put = async (url: string, body: any) => {
+    const response = await _fetch(url, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });

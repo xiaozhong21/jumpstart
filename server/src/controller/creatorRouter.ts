@@ -44,7 +44,7 @@ creatorRouter.post(
   },
 );
 
-creatorRouter.post(
+creatorRouter.put(
   "/projects/:projectId",
   async (req: Request, res: Response) => {
     const updatedProject = await creator.updateCreatorProject(
